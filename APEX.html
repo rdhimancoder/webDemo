@@ -1,0 +1,3352 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apex ERP - Enterprise Educational OS</title>
+    <meta name="description" content="Enterprise educational operating system for managing multi-franchise operations, student admissions, fee portals, and web CMS." />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <style>
+      /* ==========================================================================
+         Apex ERP - Enterprise Educational OS Stylesheet
+         ========================================================================== */
+
+      :root {
+        --primary: #004ac6;
+        --primary-hover: #003da6;
+        --primary-container: #dbe1ff;
+        --on-primary: #ffffff;
+        --on-primary-container: #00174b;
+
+        --secondary: #585e71;
+        --secondary-container: #dce2f9;
+        --on-secondary: #ffffff;
+
+        --surface: #f7f9fb;
+        --surface-lowest: #ffffff;
+        --surface-low: #f2f4f6;
+        --surface-container: #eceef0;
+        --surface-container-high: #e6e8eb;
+        --surface-container-highest: #dfe2e5;
+
+        --on-surface: #191c1e;
+        --on-surface-variant: #565e74;
+        --outline: #757780;
+        --outline-variant: #c5c6d0;
+        --border: #e2e4e9;
+
+        --success: #059669;
+        --success-bg: #d1fae5;
+        --success-text: #065f46;
+
+        --warning: #d97706;
+        --warning-bg: #fef3c7;
+        --warning-text: #92400e;
+
+        --error: #dc2626;
+        --error-bg: #fee2e2;
+        --error-text: #991b1b;
+
+        --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.03);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+        --radius-sm: 8px;
+        --radius-md: 12px;
+        --radius-lg: 16px;
+        --radius-xl: 24px;
+      }
+
+      /* Reset & Box Sizing */
+      *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      html, body {
+        min-height: 100%;
+        font-family: var(--font-sans);
+        background-color: var(--surface);
+        color: var(--on-surface);
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      button, input, select, textarea {
+        font: inherit;
+        color: inherit;
+      }
+
+      button {
+        cursor: pointer;
+        border: none;
+        background: none;
+      }
+
+      /* Material Symbols alignment */
+      .material-symbols-outlined {
+        font-family: 'Material Symbols Outlined';
+        font-weight: normal;
+        font-style: normal;
+        font-size: 20px;
+        line-height: 1;
+        letter-spacing: normal;
+        text-transform: none;
+        display: inline-block;
+        white-space: nowrap;
+        word-wrap: normal;
+        direction: ltr;
+        vertical-align: middle;
+        user-select: none;
+      }
+
+      /* Layout Hierarchy */
+      .app-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* SIDEBAR */
+      .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 280px;
+        background-color: var(--surface-lowest);
+        border-right: 1px solid var(--border);
+        display: flex;
+        flex-direction: column;
+        z-index: 40;
+        transition: transform 0.3s ease;
+      }
+
+      .sidebar-header {
+        padding: 24px 20px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .brand-icon {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #004ac6 0%, #1d4ed8 100%);
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: 800;
+        font-size: 20px;
+        box-shadow: 0 4px 10px rgba(0, 74, 198, 0.3);
+      }
+
+      .brand-info h1 {
+        font-size: 18px;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: var(--on-surface);
+        line-height: 1.2;
+      }
+
+      .brand-info span {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--outline);
+        font-weight: 600;
+      }
+
+      .sidebar-nav {
+        flex: 1;
+        padding: 16px 12px;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .nav-section-title {
+        font-size: 11px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--outline);
+        padding: 12px 12px 6px;
+      }
+
+      .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px 14px;
+        border-radius: var(--radius-md);
+        color: var(--on-surface-variant);
+        font-size: 14px;
+        font-weight: 500;
+        transition: all 0.15s ease;
+        position: relative;
+      }
+
+      .nav-link:hover {
+        background-color: var(--surface-low);
+        color: var(--on-surface);
+      }
+
+      .nav-link.active {
+        background-color: var(--primary-container);
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .nav-link .badge {
+        margin-left: auto;
+        font-size: 11px;
+        padding: 2px 8px;
+        border-radius: 9999px;
+        background-color: rgba(0, 74, 198, 0.1);
+        color: var(--primary);
+        font-weight: 600;
+      }
+
+      .sidebar-footer {
+        padding: 16px;
+        border-top: 1px solid var(--border);
+        background-color: var(--surface-low);
+      }
+
+      .branch-card {
+        background-color: var(--surface-lowest);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-md);
+        padding: 12px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .branch-avatar {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        background-color: #e0e7ff;
+        color: #3730a3;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 700;
+        font-size: 13px;
+      }
+
+      .branch-details {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .branch-title {
+        font-size: 13px;
+        font-weight: 600;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .branch-subtitle {
+        font-size: 11px;
+        color: var(--outline);
+      }
+
+      /* HEADER */
+      .header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 280px;
+        height: 70px;
+        background-color: rgba(255, 255, 255, 0.9);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 28px;
+        z-index: 30;
+        transition: left 0.3s ease;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        flex: 1;
+        max-width: 480px;
+      }
+
+      .menu-toggle-btn {
+        display: none;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-sm);
+        align-items: center;
+        justify-content: center;
+        color: var(--on-surface);
+      }
+
+      .header-search {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        background-color: var(--surface-container);
+        border: 1px solid transparent;
+        padding: 8px 14px;
+        border-radius: var(--radius-md);
+        transition: all 0.2s ease;
+      }
+
+      .header-search:focus-within {
+        border-color: var(--primary);
+        background-color: var(--surface-lowest);
+        box-shadow: 0 0 0 3px rgba(0, 74, 198, 0.12);
+      }
+
+      .header-search input {
+        border: none;
+        background: transparent;
+        outline: none;
+        width: 100%;
+        font-size: 14px;
+        color: var(--on-surface);
+      }
+
+      .header-search input::placeholder {
+        color: var(--outline);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .role-switcher-select {
+        padding: 7px 12px;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        background-color: var(--surface-lowest);
+        color: var(--primary);
+        outline: none;
+        cursor: pointer;
+      }
+
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--on-surface-variant);
+        border: 1px solid var(--border);
+        background-color: var(--surface-lowest);
+        transition: all 0.15s ease;
+        position: relative;
+      }
+
+      .icon-btn:hover {
+        background-color: var(--surface-low);
+        color: var(--on-surface);
+      }
+
+      .notification-dot {
+        position: absolute;
+        top: 9px;
+        right: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background-color: var(--error);
+        border: 2px solid var(--surface-lowest);
+      }
+
+      .user-profile-btn {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 4px 10px 4px 4px;
+        border-radius: 9999px;
+        border: 1px solid var(--border);
+        background-color: var(--surface-lowest);
+        cursor: pointer;
+      }
+
+      .user-profile-btn img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+
+      .user-profile-name {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      /* MAIN CONTENT WORKSPACE */
+      .main-content {
+        margin-left: 280px;
+        padding: 94px 28px 40px;
+        flex: 1;
+        max-width: 1400px;
+        width: calc(100% - 280px);
+      }
+
+      /* PAGE VIEW CONTAINERS */
+      .view-container {
+        display: none;
+        animation: fadeIn 0.25s ease-out;
+      }
+
+      .view-container.active {
+        display: block;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(6px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      /* HERO BANNER */
+      .hero-banner {
+        background-color: var(--surface-lowest);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 24px;
+        margin-bottom: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .hero-text span.eyebrow {
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--primary);
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .hero-text h2 {
+        font-size: 26px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--on-surface);
+      }
+
+      .hero-text p {
+        font-size: 14px;
+        color: var(--on-surface-variant);
+        margin-top: 4px;
+      }
+
+      .hero-actions {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      /* BUTTONS */
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        padding: 10px 18px;
+        border-radius: var(--radius-md);
+        font-size: 14px;
+        font-weight: 600;
+        transition: all 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: var(--on-primary);
+        box-shadow: 0 2px 4px rgba(0, 74, 198, 0.2);
+      }
+
+      .btn-primary:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-1px);
+      }
+
+      .btn-secondary {
+        background-color: var(--surface-lowest);
+        color: var(--on-surface);
+        border: 1px solid var(--border);
+      }
+
+      .btn-secondary:hover {
+        background-color: var(--surface-low);
+      }
+
+      .btn-outline {
+        border: 1px solid var(--outline-variant);
+        color: var(--on-surface-variant);
+      }
+
+      .btn-outline:hover {
+        border-color: var(--outline);
+        color: var(--on-surface);
+      }
+
+      .btn-sm {
+        padding: 6px 12px;
+        font-size: 13px;
+        border-radius: var(--radius-sm);
+      }
+
+      .btn-lg {
+        padding: 12px 24px;
+        font-size: 15px;
+      }
+
+      /* KPI GRID & CARDS */
+      .kpi-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 16px;
+        margin-bottom: 24px;
+      }
+
+      .kpi-card {
+        background-color: var(--surface-lowest);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        padding: 20px;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        box-shadow: var(--shadow-sm);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      }
+
+      .kpi-card:hover {
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+      }
+
+      .kpi-title {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--on-surface-variant);
+        margin-bottom: 6px;
+      }
+
+      .kpi-value {
+        font-size: 26px;
+        font-weight: 800;
+        color: var(--on-surface);
+        letter-spacing: -0.02em;
+        line-height: 1.2;
+      }
+
+      .kpi-meta {
+        font-size: 12px;
+        margin-top: 6px;
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        font-weight: 500;
+      }
+
+      .trend-up {
+        color: var(--success);
+      }
+
+      .trend-down {
+        color: var(--error);
+      }
+
+      .kpi-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: var(--radius-md);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .icon-blue { background-color: #eff6ff; color: #1d4ed8; }
+      .icon-emerald { background-color: #ecfdf5; color: #047857; }
+      .icon-amber { background-color: #fffbeb; color: #b45309; }
+      .icon-purple { background-color: #f5f3ff; color: #6d28d9; }
+      .icon-indigo { background-color: #e0e7ff; color: #4338ca; }
+
+      /* 2-COLUMN GRID SECTION */
+      .grid-2col {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 24px;
+        margin-bottom: 24px;
+      }
+
+      .card {
+        background-color: var(--surface-lowest);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 18px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      }
+
+      .card-title {
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--on-surface);
+      }
+
+      .card-subtitle {
+        font-size: 13px;
+        color: var(--on-surface-variant);
+        margin-top: 2px;
+      }
+
+      .card-body {
+        padding: 24px;
+      }
+
+      /* CHART CANVAS STYLING */
+      .chart-controls {
+        display: flex;
+        gap: 6px;
+      }
+
+      .filter-chip {
+        padding: 4px 10px;
+        font-size: 12px;
+        border-radius: var(--radius-sm);
+        background-color: var(--surface-low);
+        color: var(--on-surface-variant);
+        font-weight: 500;
+        border: 1px solid var(--border);
+        cursor: pointer;
+      }
+
+      .filter-chip.active {
+        background-color: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .bar-chart-wrapper {
+        margin-top: 16px;
+        width: 100%;
+        height: 220px;
+        display: flex;
+        align-items: flex-end;
+        justify-content: space-between;
+        gap: 12px;
+        padding-bottom: 24px;
+        position: relative;
+        border-bottom: 1px dashed var(--border);
+      }
+
+      .chart-bar-col {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        justify-content: flex-end;
+        position: relative;
+      }
+
+      .chart-bar-container {
+        width: 100%;
+        max-width: 44px;
+        display: flex;
+        gap: 4px;
+        align-items: flex-end;
+        height: 100%;
+      }
+
+      .bar-rev {
+        flex: 1;
+        background: linear-gradient(180deg, #004ac6 0%, #3b82f6 100%);
+        border-radius: 4px 4px 0 0;
+        transition: height 0.4s ease;
+        position: relative;
+      }
+
+      .bar-adm {
+        flex: 1;
+        background: linear-gradient(180deg, #059669 0%, #34d399 100%);
+        border-radius: 4px 4px 0 0;
+        transition: height 0.4s ease;
+        position: relative;
+      }
+
+      .chart-label {
+        position: absolute;
+        bottom: -22px;
+        font-size: 11px;
+        color: var(--outline);
+        font-weight: 600;
+      }
+
+      .chart-legend {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 18px;
+        font-size: 12px;
+      }
+
+      .legend-item {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-weight: 500;
+      }
+
+      .legend-color {
+        width: 12px;
+        height: 12px;
+        border-radius: 3px;
+      }
+
+      /* LISTS & ACTIVITY FEEDS */
+      .activity-list {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .activity-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 12px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--surface-container);
+      }
+
+      .activity-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+      }
+
+      .activity-icon {
+        width: 36px;
+        height: 36px;
+        border-radius: var(--radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+      }
+
+      .activity-content h4 {
+        font-size: 13px;
+        font-weight: 600;
+        color: var(--on-surface);
+      }
+
+      .activity-content p {
+        font-size: 12px;
+        color: var(--on-surface-variant);
+        margin-top: 2px;
+      }
+
+      .activity-time {
+        font-size: 11px;
+        color: var(--outline);
+        margin-top: 4px;
+      }
+
+      /* APPROVAL QUEUE */
+      .approval-item {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding: 14px;
+        background-color: var(--surface-low);
+        border-radius: var(--radius-md);
+        margin-bottom: 10px;
+        border: 1px solid var(--border);
+      }
+
+      .approval-badge {
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border-radius: 4px;
+        background-color: #e0e7ff;
+        color: #3730a3;
+        display: inline-block;
+        width: fit-content;
+      }
+
+      .approval-title {
+        font-size: 13px;
+        font-weight: 600;
+      }
+
+      .approval-details {
+        font-size: 12px;
+        color: var(--on-surface-variant);
+      }
+
+      .approval-actions {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 8px;
+        margin-top: 4px;
+      }
+
+      /* TABLES & DIRECTORIES */
+      .table-container {
+        overflow-x: auto;
+      }
+
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+        text-align: left;
+      }
+
+      .data-table th {
+        background-color: var(--surface-low);
+        padding: 12px 18px;
+        font-size: 12px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: var(--on-surface-variant);
+        border-bottom: 1px solid var(--border);
+      }
+
+      .data-table td {
+        padding: 14px 18px;
+        font-size: 14px;
+        color: var(--on-surface);
+        border-bottom: 1px solid var(--border);
+        vertical-align: middle;
+      }
+
+      .data-table tbody tr:hover {
+        background-color: var(--surface-low);
+      }
+
+      .data-table tbody tr:last-child td {
+        border-bottom: none;
+      }
+
+      /* BADGES & CHIPS */
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        padding: 3px 10px;
+        border-radius: 9999px;
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: capitalize;
+      }
+
+      .status-active, .status-paid, .status-enrolled {
+        background-color: var(--success-bg);
+        color: var(--success-text);
+      }
+
+      .status-pending, .status-waitlisted {
+        background-color: var(--warning-bg);
+        color: var(--warning-text);
+      }
+
+      .status-suspended, .status-failed {
+        background-color: var(--error-bg);
+        color: var(--error-text);
+      }
+
+      /* SUB TABS NAVIGATION */
+      .sub-nav-tabs {
+        display: flex;
+        gap: 8px;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 24px;
+        overflow-x: auto;
+      }
+
+      .sub-tab-btn {
+        padding: 12px 18px;
+        font-size: 14px;
+        font-weight: 600;
+        color: var(--on-surface-variant);
+        border-bottom: 2px solid transparent;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: all 0.15s ease;
+      }
+
+      .sub-tab-btn:hover {
+        color: var(--on-surface);
+      }
+
+      .sub-tab-btn.active {
+        color: var(--primary);
+        border-bottom-color: var(--primary);
+      }
+
+      /* FORM CONTROLS */
+      .form-group {
+        margin-bottom: 16px;
+      }
+
+      .form-label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: var(--on-surface);
+      }
+
+      .form-input, .form-select, .form-textarea {
+        width: 100%;
+        padding: 10px 14px;
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border);
+        background-color: var(--surface-low);
+        font-size: 14px;
+        color: var(--on-surface);
+        outline: none;
+        transition: border-color 0.15s ease;
+      }
+
+      .form-input:focus, .form-select:focus, .form-textarea:focus {
+        border-color: var(--primary);
+        background-color: var(--surface-lowest);
+        box-shadow: 0 0 0 3px rgba(0, 74, 198, 0.12);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 16px;
+      }
+
+      /* TOGGLE SWITCH */
+      .toggle-switch {
+        width: 44px;
+        height: 24px;
+        background-color: var(--outline-variant);
+        border-radius: 9999px;
+        position: relative;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+        display: inline-block;
+      }
+
+      .toggle-switch.active {
+        background-color: var(--success);
+      }
+
+      .toggle-thumb {
+        width: 18px;
+        height: 18px;
+        background-color: #fff;
+        border-radius: 50%;
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        transition: transform 0.2s ease;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      }
+
+      .toggle-switch.active .toggle-thumb {
+        transform: translateX(20px);
+      }
+
+      /* MODALS */
+      .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background-color: rgba(19, 27, 46, 0.6);
+        backdrop-filter: blur(4px);
+        z-index: 90;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 16px;
+      }
+
+      .modal-overlay.active {
+        display: flex;
+      }
+
+      .modal-card {
+        background-color: var(--surface-lowest);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border);
+        max-width: 580px;
+        width: 100%;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: var(--shadow-xl);
+        animation: scaleUp 0.2s ease-out;
+      }
+
+      .modal-card.modal-lg {
+        max-width: 820px;
+      }
+
+      @keyframes scaleUp {
+        from { opacity: 0; transform: scale(0.96); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
+      .modal-header {
+        padding: 20px 24px;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .modal-header h3 {
+        font-size: 18px;
+        font-weight: 700;
+        color: var(--on-surface);
+      }
+
+      .modal-close-btn {
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--outline);
+        border-radius: 50%;
+        padding: 4px;
+      }
+
+      .modal-close-btn:hover {
+        background-color: var(--surface-low);
+        color: var(--on-surface);
+      }
+
+      .modal-body {
+        padding: 24px;
+      }
+
+      .modal-footer {
+        padding: 16px 24px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+
+      /* LOGIN SCREEN SPLIT LAYOUT */
+      .login-screen {
+        min-height: 100vh;
+        display: flex;
+        width: 100%;
+      }
+
+      .login-left {
+        flex: 1;
+        background-color: #131b2e;
+        color: #fff;
+        padding: 48px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .login-left::before {
+        content: '';
+        position: absolute;
+        top: -100px;
+        right: -100px;
+        width: 400px;
+        height: 400px;
+        background: radial-gradient(circle, rgba(0, 74, 198, 0.25) 0%, rgba(19, 27, 46, 0) 70%);
+        pointer-events: none;
+      }
+
+      .login-right {
+        flex: 1;
+        background-color: var(--surface);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 48px 24px;
+      }
+
+      .login-box {
+        max-width: 440px;
+        width: 100%;
+      }
+
+      .role-pills {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        background-color: var(--surface-container);
+        padding: 6px;
+        border-radius: var(--radius-md);
+        margin-bottom: 20px;
+      }
+
+      .role-pill-btn {
+        padding: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        border-radius: var(--radius-sm);
+        text-align: center;
+        color: var(--on-surface-variant);
+        transition: all 0.15s ease;
+        text-transform: capitalize;
+      }
+
+      .role-pill-btn.active {
+        background-color: #fff;
+        color: var(--primary);
+        box-shadow: var(--shadow-sm);
+      }
+
+      /* TOAST NOTIFICATION */
+      .toast-box {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        background-color: #131b2e;
+        color: #fff;
+        padding: 12px 20px;
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-xl);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        z-index: 100;
+        opacity: 0;
+        transform: translateY(20px);
+        pointer-events: none;
+        transition: all 0.3s ease;
+      }
+
+      .toast-box.show {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      /* PRINT FORMATTING FOR OFFICIAL RECEIPTS */
+      @media print {
+        body * {
+          visibility: hidden;
+        }
+        #printableReceiptArea, #printableReceiptArea * {
+          visibility: visible;
+        }
+        #printableReceiptArea {
+          position: absolute;
+          left: 0;
+          top: 0;
+          width: 100%;
+          margin: 0;
+          padding: 20px;
+          background: #fff;
+        }
+      }
+
+      /* RESPONSIVE DESIGN BREAKPOINTS */
+      @media (max-width: 1024px) {
+        .sidebar {
+          transform: translateX(-100%);
+        }
+        .sidebar.mobile-open {
+          transform: translateX(0);
+        }
+        .header {
+          left: 0;
+        }
+        .main-content {
+          margin-left: 0;
+          width: 100%;
+          padding: 84px 16px 32px;
+        }
+        .menu-toggle-btn {
+          display: flex;
+        }
+        .grid-2col {
+          grid-template-columns: 1fr;
+        }
+        .login-screen {
+          flex-direction: column;
+        }
+        .login-left {
+          padding: 32px 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Mobile Backdrop -->
+    <div id="mobileOverlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:35;" onclick="closeMobileSidebar()"></div>
+
+    <div class="app-container">
+      <!-- 1. PERSISTENT SIDEBAR NAVIGATION -->
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="brand-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 3L2 12H5V20H10V14H14V20H19V12H22L12 3Z" fill="white"/>
+            </svg>
+          </div>
+          <div class="brand-info">
+            <h1>Apex ERP</h1>
+            <span>Educational OS</span>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav">
+          <span class="nav-section-title">Core Management</span>
+          <a href="#dashboard" class="nav-link active" data-page="dashboard">
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+          </a>
+          <a href="#franchisees" class="nav-link" data-page="franchisees">
+            <span class="material-symbols-outlined">storefront</span>
+            <span>Franchisees</span>
+            <span class="badge" id="sidebarFranchiseeBadge">48 Active</span>
+          </a>
+          <a href="#admissions" class="nav-link" data-page="admissions">
+            <span class="material-symbols-outlined">how_to_reg</span>
+            <span>Admissions</span>
+            <span class="badge" id="sidebarAdmissionsBadge">14.2K</span>
+          </a>
+
+          <span class="nav-section-title">Operations & Finance</span>
+          <a href="#fee-portal" class="nav-link" data-page="student-fee-portal">
+            <span class="material-symbols-outlined">payments</span>
+            <span>Fee Portal</span>
+          </a>
+          <a href="#cms-website" class="nav-link" data-page="cms-and-website">
+            <span class="material-symbols-outlined">language</span>
+            <span>CMS & Website</span>
+          </a>
+
+          <span class="nav-section-title">Security & Session</span>
+          <a href="#login" class="nav-link" data-page="login">
+            <span class="material-symbols-outlined">lock_open</span>
+            <span>Sign In / Switch</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <div class="branch-card">
+            <div class="branch-avatar">HQ</div>
+            <div class="branch-details">
+              <div class="branch-title">Apex Metro Campus</div>
+              <div class="branch-subtitle">Branch Code #101 • NYC</div>
+            </div>
+            <span class="material-symbols-outlined" style="font-size: 16px; color: var(--success);">check_circle</span>
+          </div>
+        </div>
+      </aside>
+
+      <!-- 2. GLOBAL TOP HEADER -->
+      <header class="header" id="header">
+        <div class="header-left">
+          <button class="menu-toggle-btn" onclick="toggleMobileSidebar()" title="Toggle Menu">
+            <span class="material-symbols-outlined">menu</span>
+          </button>
+          <div class="header-search">
+            <span class="material-symbols-outlined" style="color: var(--outline);">search</span>
+            <input type="text" id="globalSearchInput" placeholder="Search franchisees, student ID, course, records..." />
+          </div>
+        </div>
+
+        <div class="header-right">
+          <select class="role-switcher-select" id="headerRoleSelect" onchange="switchRole(this.value)">
+            <option value="admin">Role: Admin</option>
+            <option value="staff">Role: Staff</option>
+            <option value="franchisee">Role: Franchisee</option>
+          </select>
+
+          <button class="icon-btn" onclick="showToast('Notification drawer: 3 pending verification tasks.')" title="Notifications">
+            <span class="material-symbols-outlined">notifications</span>
+            <div class="notification-dot"></div>
+          </button>
+
+          <button class="icon-btn" onclick="openModal('auditLogModal')" title="Audit Logs">
+            <span class="material-symbols-outlined">history</span>
+          </button>
+
+          <div class="user-profile-btn" onclick="showToast('Active User: Director Vance (Admin Auth)')">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="Avatar" />
+            <span class="user-profile-name">Director Vance</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- 3. MAIN CONTENT WORKSPACE -->
+      <main class="main-content" id="mainContent">
+
+        <!-- VIEW 1: DASHBOARD -->
+        <section class="view-container active" id="view-dashboard">
+          <div class="hero-banner">
+            <div class="hero-text">
+              <span class="eyebrow">Enterprise Overview</span>
+              <h2>Apex Executive Operations</h2>
+              <p>Real-time institutional performance, admissions velocity, and regional revenue metrics.</p>
+            </div>
+            <div class="hero-actions">
+              <button class="btn btn-secondary" onclick="navigateTo('student-fee-portal')">
+                <span class="material-symbols-outlined">receipt_long</span> Fee Ledger
+              </button>
+              <button class="btn btn-primary" onclick="navigateTo('franchisees'); setFranchiseeTab('add');">
+                <span class="material-symbols-outlined">add</span> + New Franchisee
+              </button>
+            </div>
+          </div>
+
+          <div class="kpi-grid">
+            <div class="kpi-card" onclick="navigateTo('franchisees')" style="cursor: pointer;">
+              <div>
+                <p class="kpi-title">Total Franchisees</p>
+                <div class="kpi-value" id="kpiFranchiseeCount">48</div>
+                <div class="kpi-meta trend-up"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> +3 this quarter</div>
+              </div>
+              <div class="kpi-icon icon-blue"><span class="material-symbols-outlined">storefront</span></div>
+            </div>
+
+            <div class="kpi-card" onclick="navigateTo('admissions')" style="cursor: pointer;">
+              <div>
+                <p class="kpi-title">Total Admissions</p>
+                <div class="kpi-value" id="kpiAdmissionsCount">14,280</div>
+                <div class="kpi-meta trend-up"><span class="material-symbols-outlined" style="font-size: 16px;">trending_up</span> +12.4% YoY</div>
+              </div>
+              <div class="kpi-icon icon-emerald"><span class="material-symbols-outlined">how_to_reg</span></div>
+            </div>
+
+            <div class="kpi-card" onclick="navigateTo('student-fee-portal')" style="cursor: pointer;">
+              <div>
+                <p class="kpi-title">Pending Fees</p>
+                <div class="kpi-value">$124,500</div>
+                <div class="kpi-meta trend-down"><span class="material-symbols-outlined" style="font-size: 16px;">schedule</span> 32 accounts due</div>
+              </div>
+              <div class="kpi-icon icon-amber"><span class="material-symbols-outlined">payments</span></div>
+            </div>
+
+            <div class="kpi-card" onclick="navigateTo('cms-and-website'); setCMSTab('jobs');" style="cursor: pointer;">
+              <div>
+                <p class="kpi-title">Job Vacancies</p>
+                <div class="kpi-value" id="kpiJobsCount">18 Open</div>
+                <div class="kpi-meta trend-up"><span class="material-symbols-outlined" style="font-size: 16px;">group_add</span> 342 applicants</div>
+              </div>
+              <div class="kpi-icon icon-purple"><span class="material-symbols-outlined">work</span></div>
+            </div>
+
+            <div class="kpi-card" onclick="navigateTo('cms-and-website'); setCMSTab('inquiries');" style="cursor: pointer;">
+              <div>
+                <p class="kpi-title">Web Inquiries</p>
+                <div class="kpi-value" id="kpiInquiriesCount">89</div>
+                <div class="kpi-meta"><span class="material-symbols-outlined" style="font-size: 16px;">mark_email_unread</span> 14 unread</div>
+              </div>
+              <div class="kpi-icon icon-indigo"><span class="material-symbols-outlined">contact_support</span></div>
+            </div>
+          </div>
+
+          <div class="grid-2col">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Revenue vs. Admissions Intake</h3>
+                  <p class="card-subtitle">Consolidated tuition receipts compared with enrollment velocity.</p>
+                </div>
+                <div class="chart-controls">
+                  <button class="filter-chip active" id="btnChart6m" onclick="setChartPeriod('6m')">Last 6 Months</button>
+                  <button class="filter-chip" id="btnChartYtd" onclick="setChartPeriod('ytd')">Year to Date</button>
+                  <button class="filter-chip" id="btnChart1y" onclick="setChartPeriod('1y')">Annual</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="bar-chart-wrapper" id="chartBarContainer"></div>
+                <div class="chart-legend">
+                  <div class="legend-item"><span class="legend-color" style="background: #004ac6;"></span> Tuition Revenue ($ USD)</div>
+                  <div class="legend-item"><span class="legend-color" style="background: #059669;"></span> Student Intake Count</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Regional Distribution</h3>
+                <span class="status-pill status-active">Live Sync</span>
+              </div>
+              <div class="card-body" style="display:flex; flex-direction:column; gap:16px;">
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600; margin-bottom:4px;">
+                    <span>North Atlantic Zone (22 Units)</span>
+                    <span style="color:var(--primary);">48%</span>
+                  </div>
+                  <div style="height:8px; background:var(--surface-container); border-radius:9999px; overflow:hidden;">
+                    <div style="width:48%; height:100%; background:var(--primary);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600; margin-bottom:4px;">
+                    <span>West Coast Hub (14 Units)</span>
+                    <span style="color:var(--success);">32%</span>
+                  </div>
+                  <div style="height:8px; background:var(--surface-container); border-radius:9999px; overflow:hidden;">
+                    <div style="width:32%; height:100%; background:var(--success);"></div>
+                  </div>
+                </div>
+
+                <div>
+                  <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600; margin-bottom:4px;">
+                    <span>Southern Metro (12 Units)</span>
+                    <span style="color:var(--warning);">20%</span>
+                  </div>
+                  <div style="height:8px; background:var(--surface-container); border-radius:9999px; overflow:hidden;">
+                    <div style="width:20%; height:100%; background:var(--warning);"></div>
+                  </div>
+                </div>
+
+                <div style="background:var(--surface-low); padding:14px; border-radius:12px; margin-top:10px; border:1px solid var(--border);">
+                  <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="material-symbols-outlined" style="color:var(--primary);">verified</span>
+                    <span style="font-size:13px; font-weight:700;">Expansion Target Met</span>
+                  </div>
+                  <p style="font-size:12px; color:var(--on-surface-variant); margin-top:4px;">
+                    All licensed franchises meet minimum institutional enrollment thresholds.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid-2col">
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Live System Activity Feed</h3>
+                  <p class="card-subtitle">Real-time audit log of campus events.</p>
+                </div>
+                <button class="btn btn-sm btn-secondary" onclick="openModal('auditLogModal')">
+                  View Full Audit
+                </button>
+              </div>
+              <div class="card-body">
+                <div class="activity-list">
+                  <div class="activity-item">
+                    <div class="activity-icon icon-blue"><span class="material-symbols-outlined">school</span></div>
+                    <div class="activity-content">
+                      <h4>New student batch enrolled</h4>
+                      <p>Franchise #104 finalized 35 new student registrations.</p>
+                      <div class="activity-time">4m ago • Automated Gateway</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="activity-icon icon-emerald"><span class="material-symbols-outlined">payments</span></div>
+                    <div class="activity-content">
+                      <h4>Fee Clearance Reconciled</h4>
+                      <p>Batch payment of $14,200 verified for West Metro Unit.</p>
+                      <div class="activity-time">22m ago • ACH Clearing</div>
+                    </div>
+                  </div>
+                  <div class="activity-item">
+                    <div class="activity-icon icon-amber"><span class="material-symbols-outlined">storefront</span></div>
+                    <div class="activity-content">
+                      <h4>New Franchise License Filed</h4>
+                      <p>Application received from Marcus Vance for East District sector.</p>
+                      <div class="activity-time">1h ago • Governance Desk</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">Pending Approvals Queue</h3>
+                  <p class="card-subtitle">Executive authorization required.</p>
+                </div>
+                <span class="status-pill status-pending">Action Required</span>
+              </div>
+              <div class="card-body" id="approvalsListContainer"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 2: FRANCHISEES -->
+        <section class="view-container" id="view-franchisees">
+          <div class="hero-banner">
+            <div class="hero-text">
+              <span class="eyebrow">Franchise Governance</span>
+              <h2>Franchise Directory & Licensure</h2>
+              <p>Manage operating partner agreements, revenue share contracts, and audits.</p>
+            </div>
+            <button class="btn btn-primary" onclick="setFranchiseeTab('add')">
+              <span class="material-symbols-outlined">add_business</span> Onboard New Franchisee
+            </button>
+          </div>
+
+          <div class="sub-nav-tabs">
+            <button class="sub-tab-btn active" id="subTabFranchiseeList" onclick="setFranchiseeTab('view')">
+              <span class="material-symbols-outlined">view_list</span> View & Manage Directory
+            </button>
+            <button class="sub-tab-btn" id="subTabFranchiseeAdd" onclick="setFranchiseeTab('add')">
+              <span class="material-symbols-outlined">add_circle</span> Add Franchisee Registration
+            </button>
+          </div>
+
+          <div id="franchiseeListSection">
+            <div class="card" style="padding: 16px; margin-bottom: 20px;">
+              <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
+                <div style="flex:1; min-width:240px; display:flex; align-items:center; gap:8px; background:var(--surface-low); padding:8px 12px; border-radius:8px; border:1px solid var(--border);">
+                  <span class="material-symbols-outlined" style="color:var(--outline);">search</span>
+                  <input type="text" id="franchiseeSearchInput" oninput="renderFranchisees()" placeholder="Search by branch name, owner, city..." style="border:none; background:transparent; width:100%; outline:none; font-size:13px;" />
+                </div>
+                <div style="display:flex; gap:10px; align-items:center;">
+                  <span style="font-size:13px; color:var(--outline);">Status:</span>
+                  <select id="franchiseeStatusFilter" onchange="renderFranchisees()" style="padding:8px 12px; font-size:13px; border-radius:8px; border:1px solid var(--border); background:var(--surface-low); outline:none;">
+                    <option value="all">All Statuses</option>
+                    <option value="active">Active</option>
+                    <option value="pending">Pending</option>
+                    <option value="suspended">Suspended</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="card table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Branch & Location</th>
+                    <th>Managing Partner</th>
+                    <th>Commission Share</th>
+                    <th>Licensure Period</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="franchiseeTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="franchiseeAddSection" style="display: none;">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">New Educational Franchise Partner Registration</h3>
+                <span class="badge">Legal Onboarding</span>
+              </div>
+              <div class="card-body">
+                <form id="addFranchiseeForm" onsubmit="handleAddFranchiseeSubmit(event)">
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Franchise Branch Name</label>
+                      <input type="text" class="form-input" id="newFranchiseeName" placeholder="e.g. Apex Central Campus" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Primary Owner / Director</label>
+                      <input type="text" class="form-input" id="newFranchiseeOwner" placeholder="e.g. Dr. Arthur Campbell" required />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Official Email</label>
+                      <input type="email" class="form-input" id="newFranchiseeEmail" placeholder="director@branch.apex.edu" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">City & Municipality</label>
+                      <input type="text" class="form-input" id="newFranchiseeCity" placeholder="e.g. San Francisco" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">State / Province</label>
+                      <input type="text" class="form-input" id="newFranchiseeState" placeholder="e.g. CA" required />
+                    </div>
+                  </div>
+
+                  <div class="form-row">
+                    <div class="form-group">
+                      <label class="form-label">Revenue Share Percentage (%)</label>
+                      <input type="number" step="0.5" class="form-input" id="newFranchiseeCommission" value="12.5" required />
+                    </div>
+                    <div class="form-group">
+                      <label class="form-label">Estimated Initial Capital</label>
+                      <input type="text" class="form-input" id="newFranchiseeCapital" placeholder="$250,000" />
+                    </div>
+                  </div>
+
+                  <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:20px; border-top:1px solid var(--border); padding-top:16px;">
+                    <button type="button" class="btn btn-secondary" onclick="setFranchiseeTab('view')">Cancel</button>
+                    <button type="submit" class="btn btn-primary">
+                      <span class="material-symbols-outlined">save</span> Save & Issue License
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 3: ADMISSIONS -->
+        <section class="view-container" id="view-admissions">
+          <div class="hero-banner">
+            <div class="hero-text">
+              <span class="eyebrow">Student Registry</span>
+              <h2>Admissions & Academic Registry Hub</h2>
+              <p>Manage candidate pipelines, issuance of digital Smart IDs, and exam admit cards.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openAdmissionWizard()">
+              <span class="material-symbols-outlined">person_add</span> Start Admission Wizard
+            </button>
+          </div>
+
+          <div class="card" style="padding: 16px; margin-bottom: 20px;">
+            <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
+              <div style="flex:1; min-width:240px; display:flex; align-items:center; gap:8px; background:var(--surface-low); padding:8px 12px; border-radius:8px; border:1px solid var(--border);">
+                <span class="material-symbols-outlined" style="color:var(--outline);">search</span>
+                <input type="text" id="admissionsSearchInput" oninput="renderAdmissions()" placeholder="Search candidate name, admission number, course..." style="border:none; background:transparent; width:100%; outline:none; font-size:13px;" />
+              </div>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <span style="font-size:13px; color:var(--outline);">Program:</span>
+                <select id="admissionsCourseFilter" onchange="renderAdmissions()" style="padding:8px 12px; font-size:13px; border-radius:8px; border:1px solid var(--border); background:var(--surface-low); outline:none;">
+                  <option value="all">All Programs</option>
+                  <option value="B.Tech">B.Tech Engineering</option>
+                  <option value="MBA">MBA Management</option>
+                  <option value="BBA">BBA Global</option>
+                  <option value="M.Sc">M.Sc Data Science</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="card table-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Student & Admission No.</th>
+                  <th>Course & Batch</th>
+                  <th>Application Date</th>
+                  <th>Enrollment Status</th>
+                  <th>Fee Reconciliation</th>
+                  <th style="text-align: right;">Credentials & Documents</th>
+                </tr>
+              </thead>
+              <tbody id="admissionsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW 4: STUDENT FEE PORTAL -->
+        <section class="view-container" id="view-student-fee-portal">
+          <div class="hero-banner">
+            <div class="hero-text">
+              <span class="eyebrow">Financial Services</span>
+              <h2>Student Fee & Ledger Portal</h2>
+              <p>Secure institutional payment gateway, balance reconciliation, and verified receipts.</p>
+            </div>
+            <span class="status-pill status-active">
+              <span class="material-symbols-outlined" style="font-size: 16px;">verified_user</span> 256-bit SSL
+            </span>
+          </div>
+
+          <div class="card" style="padding: 16px; margin-bottom: 24px;">
+            <form onsubmit="handleFeeSearch(event)" style="display:flex; gap:12px; align-items:center;">
+              <div style="flex:1; display:flex; align-items:center; gap:8px; background:var(--surface-low); padding:10px 14px; border-radius:10px; border:1px solid var(--border);">
+                <span class="material-symbols-outlined" style="color:var(--outline);">search</span>
+                <input type="text" id="feeSearchQuery" placeholder="Enter Roll Number (e.g. APX-88210) or Registered Phone..." style="border:none; background:transparent; width:100%; outline:none; font-size:14px;" />
+              </div>
+              <button type="submit" class="btn btn-primary">
+                <span class="material-symbols-outlined">person_search</span> Lookup Student
+              </button>
+            </form>
+          </div>
+
+          <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+            <div class="kpi-card">
+              <div>
+                <p class="kpi-title">Total Fee Due</p>
+                <div class="kpi-value" id="feeTotalDueDisplay">$1,450.00</div>
+                <div class="kpi-meta" style="color: var(--warning);">Fall 2024 Balance</div>
+              </div>
+              <div class="kpi-icon icon-amber"><span class="material-symbols-outlined">pending_actions</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <p class="kpi-title">Last Paid Amount</p>
+                <div class="kpi-value" id="feeLastPaidDisplay">$2,200.00</div>
+                <div class="kpi-meta trend-up"><span class="material-symbols-outlined" style="font-size: 16px;">check_circle</span> Processed on Aug 15</div>
+              </div>
+              <div class="kpi-icon icon-emerald"><span class="material-symbols-outlined">check_circle</span></div>
+            </div>
+
+            <div class="kpi-card">
+              <div>
+                <p class="kpi-title">Academic Standing</p>
+                <div class="kpi-value" id="feeStandingDisplay">Good Standing</div>
+                <div class="kpi-meta" style="color: var(--primary);">Eligible for Registration</div>
+              </div>
+              <div class="kpi-icon icon-blue"><span class="material-symbols-outlined">verified</span></div>
+            </div>
+          </div>
+
+          <div class="card" style="padding: 24px; margin-bottom: 24px;">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:20px;">
+              <div style="display:flex; align-items:center; gap:16px;">
+                <img id="feeStudentAvatar" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80" style="width: 72px; height: 72px; border-radius:16px; object-fit:cover; border:2px solid var(--border);" alt="Student" />
+                <div>
+                  <div style="display:flex; align-items:center; gap:10px;">
+                    <h3 style="font-size: 20px; font-weight:700;" id="feeStudentName">Alexander Vance</h3>
+                    <span class="badge" id="feeStudentRoll" style="font-family:monospace; font-weight:700;">APX-88210</span>
+                  </div>
+                  <p style="font-size: 14px; color: var(--on-surface-variant); margin-top:2px;" id="feeStudentCourse">B.Tech Computer Science (Sem 4)</p>
+                  <p style="font-size: 12px; color: var(--outline); margin-top:2px;" id="feeStudentCampus">Apex Academy Downtown</p>
+                </div>
+              </div>
+              <div>
+                <button class="btn btn-primary btn-lg" id="feePayDueActionBtn" onclick="openPayFeeModal()">
+                  <span class="material-symbols-outlined">credit_card</span> Pay Fee ($1,450 Due)
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card table-container">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Fee Transaction Ledger</h3>
+                <p class="card-subtitle">Audited log of deposits, adjustments, and receipts.</p>
+              </div>
+              <button class="btn btn-sm btn-secondary" onclick="showToast('Statement PDF generated and downloading...')">
+                <span class="material-symbols-outlined">download</span> Download Statement
+              </button>
+            </div>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Transaction ID</th>
+                  <th>Particulars</th>
+                  <th>Date & Time</th>
+                  <th>Amount</th>
+                  <th>Payment Mode</th>
+                  <th>Status</th>
+                  <th style="text-align: right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="feeTransactionsTableBody"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- VIEW 5: CMS & WEBSITE -->
+        <section class="view-container" id="view-cms-and-website">
+          <div class="hero-banner">
+            <div class="hero-text">
+              <span class="eyebrow">Digital Presence</span>
+              <h2>CMS & Public Website Portal</h2>
+              <p>Manage career opportunities, inquiries, testimonials, and campus media galleries.</p>
+            </div>
+            <button class="btn btn-primary" onclick="openModal('addJobModal')">
+              <span class="material-symbols-outlined">add</span> Add New Vacancy
+            </button>
+          </div>
+
+          <div class="sub-nav-tabs">
+            <button class="sub-tab-btn cms-tab-btn active" id="cmsTabBtn-jobs" data-cmstab="jobs" onclick="setCMSTab('jobs')"><span class="material-symbols-outlined">work</span> Job Vacancies</button>
+            <button class="sub-tab-btn cms-tab-btn" id="cmsTabBtn-applicants" data-cmstab="applicants" onclick="setCMSTab('applicants')"><span class="material-symbols-outlined">group</span> Applicants</button>
+            <button class="sub-tab-btn cms-tab-btn" id="cmsTabBtn-testimonials" data-cmstab="testimonials" onclick="setCMSTab('testimonials')"><span class="material-symbols-outlined">format_quote</span> Testimonials</button>
+            <button class="sub-tab-btn cms-tab-btn" id="cmsTabBtn-gallery" data-cmstab="gallery" onclick="setCMSTab('gallery')"><span class="material-symbols-outlined">photo_library</span> Gallery Media</button>
+            <button class="sub-tab-btn cms-tab-btn" id="cmsTabBtn-inquiries" data-cmstab="inquiries" onclick="setCMSTab('inquiries')"><span class="material-symbols-outlined">mail</span> Web Inquiries</button>
+          </div>
+
+          <div class="cms-panel" id="cms-panel-jobs">
+            <div class="card table-container">
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>Job Title & Specialization</th>
+                    <th>Department</th>
+                    <th>Location</th>
+                    <th>Type</th>
+                    <th>Applicants</th>
+                    <th>Status</th>
+                    <th style="text-align: right;">Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="jobsTableBody"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="cms-panel" id="cms-panel-applicants" style="display: none;">
+            <div class="card" style="padding: 24px;">
+              <h3 style="font-size: 16px; font-weight:700; margin-bottom: 12px;">Candidate Submissions</h3>
+              <div id="applicantsListContainer"></div>
+            </div>
+          </div>
+
+          <div class="cms-panel" id="cms-panel-testimonials" style="display: none;">
+            <div class="kpi-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));" id="testimonialsGridContainer"></div>
+          </div>
+
+          <div class="cms-panel" id="cms-panel-gallery" style="display: none;">
+            <div class="card" style="padding: 24px;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+                <div>
+                  <h3 style="font-size: 16px; font-weight:700;">Campus Media Carousel</h3>
+                  <p style="font-size: 13px; color: var(--outline);">Live sync with public prospective student landing page.</p>
+                </div>
+                <button class="btn btn-primary btn-sm" onclick="showToast('Upload photo dialog opened.')">
+                  <span class="material-symbols-outlined">cloud_upload</span> Upload Photos
+                </button>
+              </div>
+
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:16px;">
+                <div class="card" style="overflow:hidden;">
+                  <img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=400&auto=format&fit=crop&q=80" style="width:100%; height:140px; object-fit:cover;" alt="Convocation" />
+                  <div style="padding:12px;">
+                    <div style="font-weight:700; font-size:13px;">Annual Convocation 2024</div>
+                    <span style="font-size:11px; color:var(--primary); font-weight:600;">Ceremony</span>
+                  </div>
+                </div>
+                <div class="card" style="overflow:hidden;">
+                  <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?w=400&auto=format&fit=crop&q=80" style="width:100%; height:140px; object-fit:cover;" alt="Hackathon" />
+                  <div style="padding:12px;">
+                    <div style="font-weight:700; font-size:13px;">Robotics Hackathon Finals</div>
+                    <span style="font-size:11px; color:var(--primary); font-weight:600;">Innovation</span>
+                  </div>
+                </div>
+                <div class="card" style="overflow:hidden;">
+                  <img src="https://images.unsplash.com/photo-1562774053-701939374585?w=400&auto=format&fit=crop&q=80" style="width:100%; height:140px; object-fit:cover;" alt="Labs" />
+                  <div style="padding:12px;">
+                    <div style="font-weight:700; font-size:13px;">New Engineering Labs</div>
+                    <span style="font-size:11px; color:var(--primary); font-weight:600;">Campus Tour</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="cms-panel" id="cms-panel-inquiries" style="display: none;">
+            <div class="card" style="padding: 24px;">
+              <h3 style="font-size: 16px; font-weight:700; margin-bottom: 16px;">Public Contact Inquiries</h3>
+              <div id="inquiriesListContainer"></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- VIEW 6: LOGIN SCREEN -->
+        <section class="view-container" id="view-login">
+          <div class="login-screen">
+            <div class="login-left">
+              <div>
+                <div style="display:flex; align-items:center; gap:12px; margin-bottom: 32px;">
+                  <div class="brand-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                      <path d="M12 3L2 12H5V20H10V14H14V20H19V12H22L12 3Z" fill="white"/>
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 style="font-size: 22px; font-weight:800; color:#fff;">Apex ERP</h2>
+                    <span style="font-size: 11px; text-transform:uppercase; color:#93c5fd; font-weight:600;">Educational OS</span>
+                  </div>
+                </div>
+
+                <span style="display:inline-block; font-size: 11px; font-weight:700; color:#93c5fd; background:rgba(59,130,246,0.2); padding: 4px 10px; border-radius:9999px; margin-bottom:16px;">
+                  ENTERPRISE ARCHITECTURE
+                </span>
+
+                <h1 style="font-size: 38px; font-weight:800; line-height:1.2; margin-bottom:18px;">
+                  Apex Enterprise Educational OS
+                </h1>
+
+                <p style="font-size: 16px; color: #cbd5e1; max-width: 480px; line-height: 1.6; margin-bottom:32px;">
+                  Unified multi-franchise administrative command, financial governance, real-time student registry, and omnichannel campus management.
+                </p>
+
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; border-top:1px solid rgba(255,255,255,0.15); padding-top:24px;">
+                  <div>
+                    <div style="font-size: 32px; font-weight:800;">500+</div>
+                    <div style="font-size: 13px; color:#94a3b8;">Active Franchise Locations</div>
+                  </div>
+                  <div>
+                    <div style="font-size: 32px; font-weight:800;">120k+</div>
+                    <div style="font-size: 13px; color:#94a3b8;">Enrolled Active Students</div>
+                  </div>
+                </div>
+              </div>
+
+              <div style="font-size: 12px; color: #94a3b8; display:flex; justify-content:space-between; align-items:center; border-top:1px solid rgba(255,255,255,0.1); padding-top:16px;">
+                <span>SOC 2 Type II Certified • 256-Bit SSL</span>
+                <span>Version 2.4.0</span>
+              </div>
+            </div>
+
+            <div class="login-right">
+              <div class="login-box">
+                <h2 style="font-size: 28px; font-weight:800; margin-bottom:4px;">Welcome Back</h2>
+                <p style="font-size: 14px; color: var(--on-surface-variant); margin-bottom: 24px;">
+                  Enter credentials to access your administrative workspace.
+                </p>
+
+                <div class="role-pills">
+                  <button type="button" class="role-pill-btn active" onclick="this.parentElement.querySelectorAll('.role-pill-btn').forEach(b => b.classList.remove('active')); this.classList.add('active'); switchRole('admin');">Admin</button>
+                  <button type="button" class="role-pill-btn" onclick="this.parentElement.querySelectorAll('.role-pill-btn').forEach(b => b.classList.remove('active')); this.classList.add('active'); switchRole('staff');">Staff</button>
+                  <button type="button" class="role-pill-btn" onclick="this.parentElement.querySelectorAll('.role-pill-btn').forEach(b => b.classList.remove('active')); this.classList.add('active'); switchRole('franchisee');">Franchisee</button>
+                </div>
+
+                <form onsubmit="event.preventDefault(); showToast('Signing into dashboard...'); setTimeout(() => navigateTo('dashboard'), 400);">
+                  <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <input type="email" class="form-input" value="director.vance@apex-erp.edu" required />
+                  </div>
+
+                  <div class="form-group">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+                      <label class="form-label" style="margin-bottom:0;">Password</label>
+                      <a href="javascript:void(0)" onclick="showToast('Password reset email dispatched.')" style="font-size:12px; color:var(--primary); font-weight:600;">Forgot?</a>
+                    </div>
+                    <input type="password" class="form-input" value="••••••••••••" required />
+                  </div>
+
+                  <button type="submit" class="btn btn-primary btn-lg" style="width:100%; margin-top:8px;">Sign In to Dashboard</button>
+                </form>
+
+                <div style="text-align:center; margin-top:20px;">
+                  <button type="button" onclick="navigateTo('dashboard')" style="font-size:13px; color:var(--primary); font-weight:600;">
+                    ← Skip to Live Dashboard (Guest Mode)
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <!-- 4. MODALS & DIALOGS -->
+    <!-- Student Detail Modal -->
+    <div class="modal-overlay" id="studentDetailModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3 id="studentModalTitle">Student Credential</h3>
+          <button class="modal-close-btn" onclick="closeModal('studentDetailModal')"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body" id="studentModalContent"></div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeModal('studentDetailModal')">Close</button>
+          <button class="btn btn-primary" onclick="showToast('Document sent to print queue!')"><span class="material-symbols-outlined">print</span> Print Credential</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Admission Wizard Modal -->
+    <div class="modal-overlay" id="admissionWizardModal">
+      <div class="modal-card modal-lg">
+        <div class="modal-header">
+          <div>
+            <h3>New Student Enrollment Wizard</h3>
+            <span id="wizStepIndicator" style="font-size:12px; color:var(--primary); font-weight:600;">Step 1 of 3</span>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('admissionWizardModal')"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <div id="wizStep1">
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:12px;">Candidate Personal Information</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Full Legal Name</label>
+                <input type="text" class="form-input" id="wizStudentName" placeholder="e.g. Liam Zhang" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email Address</label>
+                <input type="email" class="form-input" id="wizStudentEmail" placeholder="liam.z@apex.edu" required />
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Phone Number</label>
+                <input type="text" class="form-input" id="wizStudentPhone" placeholder="+1 (555) 019-3322" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Date of Birth</label>
+                <input type="date" class="form-input" id="wizStudentDob" value="2005-06-15" />
+              </div>
+            </div>
+          </div>
+
+          <div id="wizStep2" style="display:none;">
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:12px;">Academic Program & Course Allocation</h4>
+            <div class="form-group">
+              <label class="form-label">Program of Study</label>
+              <select class="form-select" id="wizStudentCourse">
+                <option value="B.Tech Computer Science">B.Tech Computer Science</option>
+                <option value="MBA Business Analytics">MBA Business Analytics</option>
+                <option value="BBA Global Management">BBA Global Management</option>
+                <option value="M.Sc Data Science">M.Sc Data Science</option>
+              </select>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Allocated Session</label>
+                <select class="form-select" id="wizStudentBatch">
+                  <option value="Batch A (Morning)">Batch A (Morning Session)</option>
+                  <option value="Batch B (Evening)">Batch B (Evening Session)</option>
+                  <option value="Batch C (Weekend)">Batch C (Weekend Executive)</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Tuition Fee Standard</label>
+                <input type="text" class="form-input" value="$5,000 / Academic Year" readonly />
+              </div>
+            </div>
+          </div>
+
+          <div id="wizStep3" style="display:none;">
+            <h4 style="font-size:15px; font-weight:700; margin-bottom:12px;">Parent / Guardian Verification</h4>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Guardian Full Name</label>
+                <input type="text" class="form-input" id="wizGuardianName" placeholder="e.g. Robert Zhang" />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Guardian Phone</label>
+                <input type="text" class="form-input" id="wizGuardianPhone" placeholder="+1 (555) 987-0011" />
+              </div>
+            </div>
+            <div style="background:var(--surface-low); padding:12px; border-radius:8px; border:1px solid var(--border); font-size:12px; margin-top:10px;">
+              <span class="material-symbols-outlined" style="font-size:16px; color:var(--primary); vertical-align:middle;">info</span>
+              By clicking "Submit & Enroll", the student profile, smart credentials, and ledger are instantiated instantly.
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" id="wizPrevBtn" onclick="prevAdmissionWizardStep()" style="display:none;">Previous</button>
+          <button type="button" class="btn btn-primary" id="wizNextBtn" onclick="nextAdmissionWizardStep()">Next Step</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pay Fee Modal -->
+    <div class="modal-overlay" id="payFeeModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h3>Secure Fee Checkout</h3>
+            <span style="font-size:12px; color:var(--outline);" id="payFeeModalStudentMeta">Alexander Vance (APX-88210)</span>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('payFeeModal')"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <div style="background:var(--surface-low); padding:16px; border-radius:12px; border:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; margin-bottom:16px;">
+            <div>
+              <span style="font-size:12px; color:var(--outline);">Total Payable:</span>
+              <h3 style="font-size:24px; font-weight:800; color:var(--primary);" id="payFeePayableDisplay">$1,450.00</h3>
+            </div>
+            <span class="status-pill status-active">Current Dues</span>
+          </div>
+
+          <form onsubmit="handlePayFeeSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Cardholder Name</label>
+              <input type="text" class="form-input" value="Alexander Vance" required />
+            </div>
+            <div class="form-group">
+              <label class="form-label">Card Number</label>
+              <input type="text" class="form-input" value="•••• •••• •••• 4821" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Expiry Date</label>
+                <input type="text" class="form-input" value="08/27" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">CVV</label>
+                <input type="password" class="form-input" value="321" required />
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+              <button type="button" class="btn btn-secondary" onclick="closeModal('payFeeModal')">Cancel</button>
+              <button type="submit" class="btn btn-primary" id="payFeeAuthorizeBtn">
+                <span class="material-symbols-outlined">lock</span> Authorize Payment
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Official Fee Receipt Modal -->
+    <div class="modal-overlay" id="receiptModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <div>
+            <h3>Official Fee Receipt</h3>
+            <span style="font-size:12px; color:var(--outline);">Apex Financial Bureau</span>
+          </div>
+          <button class="modal-close-btn" onclick="closeModal('receiptModal')"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body" id="printableReceiptArea">
+          <div style="background:var(--surface-low); border:1px solid var(--border); border-radius:12px; padding:20px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid var(--border); padding-bottom:12px; margin-bottom:16px;">
+              <div>
+                <h4 style="font-size:15px; font-weight:800;">APEX INSTITUTIONAL ERP</h4>
+                <p style="font-size:12px; color:var(--outline);">Receipt #<span id="receiptTxnNo">RCP-2024-001</span></p>
+              </div>
+              <span class="status-pill status-active">PAID IN FULL</span>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; font-size:12px; margin-bottom:16px;">
+              <div>
+                <span style="color:var(--outline); display:block;">Student Name:</span>
+                <strong id="receiptStudentName">Alexander Vance</strong>
+              </div>
+              <div>
+                <span style="color:var(--outline); display:block;">Roll Number:</span>
+                <strong id="receiptRollNo" style="font-family:monospace; color:var(--primary);">APX-88210</strong>
+              </div>
+              <div>
+                <span style="color:var(--outline); display:block;">Payment Date:</span>
+                <span id="receiptDate">Oct 24, 2024</span>
+              </div>
+              <div>
+                <span style="color:var(--outline); display:block;">Reference:</span>
+                <span id="receiptTxnRef" style="font-family:monospace;">TXN-99823411</span>
+              </div>
+            </div>
+
+            <div style="border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:10px 0; margin-bottom:12px;">
+              <div style="display:flex; justify-content:space-between; font-size:14px; font-weight:700;">
+                <span id="receiptParticulars">Semester Tuition Fee</span>
+                <span id="receiptAmount">$1,450.00</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; font-size:12px; color:var(--outline); margin-top:4px;">
+                <span>Payment Mode: <span id="receiptPaymentMode">Credit Card</span></span>
+                <span>Status: Reconciled</span>
+              </div>
+            </div>
+
+            <div style="display:flex; justify-content:space-between; font-size:11px; color:var(--outline);">
+              <span>Authorized Institutional Stamp</span>
+              <span style="font-family:monospace; color:var(--success);">VERIFIED: #A92-8F12-E</span>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeModal('receiptModal')">Close</button>
+          <button class="btn btn-primary" onclick="window.print()">
+            <span class="material-symbols-outlined">print</span> Print Official Copy
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Career Opening Modal -->
+    <div class="modal-overlay" id="addJobModal">
+      <div class="modal-card">
+        <div class="modal-header">
+          <h3>Post New Career Opening</h3>
+          <button class="modal-close-btn" onclick="closeModal('addJobModal')"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <form onsubmit="handleAddJobSubmit(event)">
+            <div class="form-group">
+              <label class="form-label">Job Title</label>
+              <input type="text" class="form-input" id="newJobTitle" placeholder="e.g. Lead Robotics Instructor" required />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label">Department</label>
+                <select class="form-select" id="newJobDept">
+                  <option value="Academics">Academics</option>
+                  <option value="Operations">Operations</option>
+                  <option value="Student Services">Student Services</option>
+                  <option value="Marketing">Marketing</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Type</label>
+                <select class="form-select" id="newJobType">
+                  <option value="Full-time">Full-time</option>
+                  <option value="Part-time">Part-time</option>
+                  <option value="Remote">Remote</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Location</label>
+              <input type="text" class="form-input" id="newJobLocation" placeholder="e.g. New York HQ or Remote" required />
+            </div>
+
+            <div style="display:flex; justify-content:flex-end; gap:10px; margin-top:16px;">
+              <button type="button" class="btn btn-secondary" onclick="closeModal('addJobModal')">Cancel</button>
+              <button type="submit" class="btn btn-primary">Publish Vacancy</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audit Log Modal -->
+    <div class="modal-overlay" id="auditLogModal">
+      <div class="modal-card modal-lg">
+        <div class="modal-header">
+          <h3>Executive System Audit Trail</h3>
+          <button class="modal-close-btn" onclick="closeModal('auditLogModal')"><span class="material-symbols-outlined">close</span></button>
+        </div>
+        <div class="modal-body">
+          <div class="activity-list">
+            <div class="activity-item">
+              <div class="activity-icon icon-blue"><span class="material-symbols-outlined">security</span></div>
+              <div class="activity-content">
+                <h4>Admin Login Session Authenticated</h4>
+                <p>IP 192.168.1.104 • Two-Factor Authorization verified for Director Vance.</p>
+                <div class="activity-time">2 mins ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon icon-emerald"><span class="material-symbols-outlined">sync</span></div>
+              <div class="activity-content">
+                <h4>Automated Financial Reconciliation Run</h4>
+                <p>Synced $142,500 across 48 franchise accounts with 0 discrepancies.</p>
+                <div class="activity-time">15 mins ago</div>
+              </div>
+            </div>
+            <div class="activity-item">
+              <div class="activity-icon icon-amber"><span class="material-symbols-outlined">vpn_key</span></div>
+              <div class="activity-content">
+                <h4>Franchise Partner Portal Token Issued</h4>
+                <p>Generated credentials for Westside Prep administrative director.</p>
+                <div class="activity-time">1 hour ago</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" onclick="closeModal('auditLogModal')">Close</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification Banner -->
+    <div class="toast-box" id="toastNotification">
+      <span class="material-symbols-outlined" style="color: #34d399;">check_circle</span>
+      <span id="toastMessageText">Action completed successfully.</span>
+    </div>
+
+    <!-- Complete Application Controller -->
+    <script>
+      /**
+       * Apex ERP - Enterprise Educational OS JavaScript Controller
+       */
+
+      // Datasets
+      let FRANCHISEES = [
+        {
+          id: 'f-1',
+          initials: 'AD',
+          name: 'Apex Academy Downtown',
+          ownerName: 'Marcus Vance',
+          email: 'marcus@apexdown.com',
+          city: 'New York',
+          state: 'NY',
+          commission: 12.5,
+          period: 'Jan 2023 - Jan 2028',
+          status: 'active',
+          phone: '+1 (555) 234-5678',
+          capital: '$350,000'
+        },
+        {
+          id: 'f-2',
+          initials: 'AN',
+          name: 'Apex North Campus',
+          ownerName: 'Sarah Jenkins',
+          email: 's.jenkins@apexnorth.com',
+          city: 'Boston',
+          state: 'MA',
+          commission: 10.0,
+          period: 'Jun 2022 - Jun 2027',
+          status: 'active',
+          phone: '+1 (555) 345-6789',
+          capital: '$250,000'
+        },
+        {
+          id: 'f-3',
+          initials: 'AW',
+          name: 'Apex Westside Prep',
+          ownerName: 'David Ross',
+          email: 'dross@westside.edu',
+          city: 'Austin',
+          state: 'TX',
+          commission: 15.0,
+          period: 'Pending Signing',
+          status: 'pending',
+          phone: '+1 (555) 456-7890',
+          capital: '$200,000'
+        },
+        {
+          id: 'f-4',
+          initials: 'AC',
+          name: 'Apex Coastal Learning',
+          ownerName: 'Elena Rostova',
+          email: 'elena@coastalearn.com',
+          city: 'Miami',
+          state: 'FL',
+          commission: 11.0,
+          period: 'Expired Oct 2023',
+          status: 'suspended',
+          phone: '+1 (555) 567-8901',
+          capital: '$220,000'
+        },
+        {
+          id: 'f-5',
+          initials: 'AL',
+          name: 'Apex Lakeshore Institute',
+          ownerName: 'Jonathan Meyer',
+          email: 'j.meyer@apexlake.org',
+          city: 'Chicago',
+          state: 'IL',
+          commission: 12.0,
+          period: 'Feb 2024 - Feb 2029',
+          status: 'active',
+          phone: '+1 (555) 678-9012',
+          capital: '$280,000'
+        }
+      ];
+
+      let STUDENTS = [
+        {
+          id: 's-1',
+          admissionNo: 'ADM-2024-8891',
+          name: 'Samantha Reed',
+          email: 'samantha.r@apex.edu',
+          avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+          course: 'B.Tech Computer Science',
+          batch: 'Batch A (Morning) • 2024',
+          year: '2024 - 2025',
+          applicationDate: 'Oct 24, 2024',
+          status: 'Enrolled',
+          feeStatus: 'Paid ($4,500)',
+          feeAmount: 5000,
+          feePaid: 4500,
+          phone: '+1 (555) 019-2834',
+          guardianName: 'Robert Reed',
+          guardianPhone: '+1 (555) 987-6543'
+        },
+        {
+          id: 's-2',
+          admissionNo: 'ADM-2024-8892',
+          name: 'Marcus Vance',
+          email: 'marcus.v@apex.edu',
+          avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+          course: 'MBA Business Analytics',
+          batch: 'Batch B (Evening) • 2024',
+          year: '2024 - 2025',
+          applicationDate: 'Oct 23, 2024',
+          status: 'Pending',
+          feeStatus: 'Due ($2,100)',
+          feeAmount: 4200,
+          feePaid: 2100,
+          phone: '+1 (555) 018-9921',
+          guardianName: 'Arthur Vance',
+          guardianPhone: '+1 (555) 987-1122'
+        },
+        {
+          id: 's-3',
+          admissionNo: 'ADM-2024-8893',
+          name: 'Elena Rostova',
+          email: 'elena.r@apex.edu',
+          avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+          course: 'BBA Global Management',
+          batch: 'Batch A (Morning) • 2024',
+          year: '2024 - 2025',
+          applicationDate: 'Oct 22, 2024',
+          status: 'Enrolled',
+          feeStatus: 'Paid ($5,000)',
+          feeAmount: 5000,
+          feePaid: 5000,
+          phone: '+1 (555) 017-3344',
+          guardianName: 'Dmitri Rostov',
+          guardianPhone: '+1 (555) 987-4455'
+        },
+        {
+          id: 's-4',
+          admissionNo: 'ADM-2024-8894',
+          name: 'Liam Chen',
+          email: 'liam.c@apex.edu',
+          avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
+          course: 'M.Sc Data Science',
+          batch: 'Batch C (Weekend) • 2024',
+          year: '2024 - 2025',
+          applicationDate: 'Oct 21, 2024',
+          status: 'Waitlisted',
+          feeStatus: 'Not Applicable',
+          feeAmount: 4800,
+          feePaid: 0,
+          phone: '+1 (555) 016-8877',
+          guardianName: 'Wei Chen',
+          guardianPhone: '+1 (555) 987-9988'
+        }
+      ];
+
+      let FEE_TRANSACTIONS = [
+        {
+          id: 'TXN-99823411',
+          particulars: 'Semester 4 Tuition Fee',
+          dateTime: 'Aug 15, 2024, 10:42 AM',
+          amount: 2200.00,
+          paymentMode: 'Credit Card (*4821)',
+          status: 'Paid',
+          receiptNo: 'RCP-2024-001'
+        },
+        {
+          id: 'TXN-88712390',
+          particulars: 'Library & Lab Deposit Fee',
+          dateTime: 'Jan 10, 2024, 02:15 PM',
+          amount: 450.00,
+          paymentMode: 'Bank Transfer (ACH)',
+          status: 'Paid',
+          receiptNo: 'RCP-2024-002'
+        },
+        {
+          id: 'TXN-77610294',
+          particulars: 'Semester 3 Tuition Fee',
+          dateTime: 'Jan 05, 2024, 11:30 AM',
+          amount: 2100.00,
+          paymentMode: 'PayPal',
+          status: 'Paid',
+          receiptNo: 'RCP-2024-003'
+        },
+        {
+          id: 'TXN-PENDING-01',
+          particulars: 'Semester 5 Advance / Dues',
+          dateTime: 'Due Oct 31, 2024',
+          amount: 1450.00,
+          paymentMode: '—',
+          status: 'Pending',
+          receiptNo: ''
+        }
+      ];
+
+      let JOBS = [
+        {
+          id: 'job-1',
+          title: 'Senior Mathematics Educator',
+          department: 'Academics',
+          location: 'New York HQ',
+          type: 'Full-time',
+          applicantsCount: 24,
+          isActive: true
+        },
+        {
+          id: 'job-2',
+          title: 'Campus Franchise Director',
+          department: 'Operations',
+          location: 'Chicago Branch',
+          type: 'Full-time',
+          applicantsCount: 12,
+          isActive: true
+        },
+        {
+          id: 'job-3',
+          title: 'Student Counselor & Advisor',
+          department: 'Student Services',
+          location: 'Remote / Hybrid',
+          type: 'Part-time',
+          applicantsCount: 8,
+          isActive: false
+        },
+        {
+          id: 'job-4',
+          title: 'Admissions Outreach Specialist',
+          department: 'Marketing',
+          location: 'Boston, MA',
+          type: 'Full-time',
+          applicantsCount: 19,
+          isActive: true
+        }
+      ];
+
+      let APPLICANTS = [
+        { id: '1', name: 'Dr. Arthur Campbell', role: 'Senior Mathematics Educator', exp: '8 yrs', status: 'Shortlisted', date: 'Yesterday' },
+        { id: '2', name: 'Melissa Zhao', role: 'Admissions Outreach Specialist', exp: '4 yrs', status: 'Under Review', date: '2 days ago' },
+        { id: '3', name: 'Brian O’Connor', role: 'Campus Franchise Director', exp: '11 yrs', status: 'Interview Scheduled', date: 'Oct 20' }
+      ];
+
+      let TESTIMONIALS = [
+        { id: '1', author: 'Jessica Miller', role: 'Class of 2024 Alumni', quote: 'Apex transformed my career trajectory in Data Science. The curriculum and mentorship are world-class.', approved: true },
+        { id: '2', author: 'David Zhang', role: 'B.Tech CS Student', quote: 'The interactive labs and automated grading system gave us real-world engineering exposure from day one.', approved: true },
+        { id: '3', author: 'Clara Oswald', role: 'Parent', quote: 'Transparent fee tracking and direct advisor access make Apex the best educational institution we have partnered with.', approved: false }
+      ];
+
+      let INQUIRIES = [
+        { id: '1', name: 'Michael Chang', email: 'm.chang@innovate.org', subject: 'Franchise Expansion in Austin', msg: 'We are interested in opening a second franchise campus in the Austin metro area.', time: '1h ago', replied: false },
+        { id: '2', name: 'Sophia Loren', email: 'sophia@parentgroup.com', subject: 'Scholarship Application Guidelines', msg: 'Could you please forward the criteria for Fall 2025 STEM scholarships?', time: '3h ago', replied: true }
+      ];
+
+      let APPROVALS = [
+        { id: 'appr-1', category: 'FRANCHISE AGREEMENT', title: 'Apex Learning Center - Sector 7', details: 'Applicant: Sarah Jenkins • Initial Capital: $250,000' },
+        { id: 'appr-2', category: 'FEE WAIVER REQUEST', title: 'Student ID #88419 - Scholarship Adjustment', details: 'Branch: West Metro Unit • Amount: $1,200' },
+        { id: 'appr-3', category: 'HIRING POSITION', title: 'Senior Mathematics Instructor', details: 'Branch: Downtown Campus • Salary Grade: Tier 3' }
+      ];
+
+      let activeStudentAccount = {
+        name: 'Alexander Vance',
+        rollNo: 'APX-88210',
+        course: 'B.Tech Computer Science (Sem 4)',
+        campus: 'Apex Academy Downtown',
+        email: 'a.vance@apex.edu',
+        phone: '+1 (555) 234-5678',
+        avatarUrl: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80',
+        dueAmount: 1450.00,
+        lastPaid: 2200.00,
+        standing: 'Good Standing'
+      };
+
+      const appState = {
+        currentPage: 'dashboard',
+        userRole: 'admin',
+        franchiseeTab: 'view',
+        cmsTab: 'jobs',
+        chartPeriod: '6m',
+        mobileMenuOpen: false,
+        admissionStep: 1
+      };
+
+      const CHART_DATA = {
+        '6m': [
+          { label: 'May', revH: 55, admH: 45 },
+          { label: 'Jun', revH: 70, admH: 60 },
+          { label: 'Jul', revH: 65, admH: 52 },
+          { label: 'Aug', revH: 95, admH: 85 },
+          { label: 'Sep', revH: 80, admH: 75 },
+          { label: 'Oct', revH: 90, admH: 82 }
+        ],
+        'ytd': [
+          { label: 'Q1', revH: 60, admH: 50 },
+          { label: 'Q2', revH: 75, admH: 68 },
+          { label: 'Q3', revH: 92, admH: 84 },
+          { label: 'Q4', revH: 88, admH: 80 }
+        ],
+        '1y': [
+          { label: '2021', revH: 40, admH: 35 },
+          { label: '2022', revH: 60, admH: 55 },
+          { label: '2023', revH: 80, admH: 72 },
+          { label: '2024', revH: 98, admH: 90 }
+        ]
+      };
+
+      // Toast Notification
+      let toastTimer = null;
+      function showToast(message) {
+        const toast = document.getElementById('toastNotification');
+        const textNode = document.getElementById('toastMessageText');
+        if (textNode) textNode.textContent = message;
+        if (toast) {
+          toast.classList.add('show');
+          if (toastTimer) clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => {
+            toast.classList.remove('show');
+          }, 3000);
+        }
+      }
+
+      // Modal Handlers
+      function openModal(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('active');
+      }
+
+      function closeModal(id) {
+        const el = document.getElementById(id);
+        if (el) el.classList.remove('active');
+      }
+
+      // Sidebar & Navigation Controls
+      function toggleMobileSidebar() {
+        appState.mobileMenuOpen = !appState.mobileMenuOpen;
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('mobileOverlay');
+        if (appState.mobileMenuOpen) {
+          sidebar.classList.add('mobile-open');
+          if (overlay) overlay.style.display = 'block';
+        } else {
+          sidebar.classList.remove('mobile-open');
+          if (overlay) overlay.style.display = 'none';
+        }
+      }
+
+      function closeMobileSidebar() {
+        appState.mobileMenuOpen = false;
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('mobileOverlay');
+        if (sidebar) sidebar.classList.remove('mobile-open');
+        if (overlay) overlay.style.display = 'none';
+      }
+
+      function navigateTo(pageId) {
+        appState.currentPage = pageId;
+
+        document.querySelectorAll('.view-container').forEach(view => {
+          view.classList.remove('active');
+        });
+        const activeView = document.getElementById(`view-${pageId}`);
+        if (activeView) activeView.classList.add('active');
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+          if (link.getAttribute('data-page') === pageId) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+
+        const sidebar = document.getElementById('sidebar');
+        const header = document.getElementById('header');
+        const mainContent = document.getElementById('mainContent');
+
+        if (pageId === 'login') {
+          if (sidebar) sidebar.style.display = 'none';
+          if (header) header.style.display = 'none';
+          if (mainContent) {
+            mainContent.style.marginLeft = '0';
+            mainContent.style.padding = '0';
+            mainContent.style.width = '100%';
+          }
+        } else {
+          if (sidebar) sidebar.style.display = 'flex';
+          if (header) header.style.display = 'flex';
+          if (mainContent) {
+            mainContent.style.marginLeft = '';
+            mainContent.style.padding = '';
+            mainContent.style.width = '';
+          }
+        }
+
+        closeMobileSidebar();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        if (pageId === 'dashboard') renderDashboard();
+        if (pageId === 'franchisees') renderFranchisees();
+        if (pageId === 'admissions') renderAdmissions();
+        if (pageId === 'student-fee-portal') renderFeePortal();
+        if (pageId === 'cms-and-website') renderCMS();
+      }
+
+      function switchRole(role) {
+        appState.userRole = role;
+        showToast(`Role updated to: ${role.toUpperCase()}`);
+      }
+
+      // Chart & Dashboard Rendering
+      function setChartPeriod(period) {
+        appState.chartPeriod = period;
+        ['6m', 'ytd', '1y'].forEach(p => {
+          const btn = document.getElementById(`btnChart${p.charAt(0).toUpperCase() + p.slice(1)}`);
+          if (btn) {
+            if (p === period) btn.classList.add('active');
+            else btn.classList.remove('active');
+          }
+        });
+        renderChart();
+      }
+
+      function renderChart() {
+        const container = document.getElementById('chartBarContainer');
+        if (!container) return;
+        const data = CHART_DATA[appState.chartPeriod] || CHART_DATA['6m'];
+        container.innerHTML = data.map(item => `
+          <div class="chart-bar-col">
+            <div class="chart-bar-container">
+              <div class="bar-rev" style="height: ${item.revH}%;" title="Revenue: ${item.revH}%"></div>
+              <div class="bar-adm" style="height: ${item.admH}%;" title="Admissions: ${item.admH}%"></div>
+            </div>
+            <span class="chart-label">${item.label}</span>
+          </div>
+        `).join('');
+      }
+
+      function renderApprovals() {
+        const container = document.getElementById('approvalsListContainer');
+        if (!container) return;
+        if (APPROVALS.length === 0) {
+          container.innerHTML = `<div style="text-align:center; padding:20px; color:var(--outline); font-size:13px;">All approval requests cleared!</div>`;
+          return;
+        }
+        container.innerHTML = APPROVALS.map(item => `
+          <div class="approval-item" id="${item.id}">
+            <span class="approval-badge">${item.category}</span>
+            <div class="approval-title">${item.title}</div>
+            <div class="approval-details">${item.details}</div>
+            <div class="approval-actions">
+              <button class="btn btn-sm btn-outline" onclick="handleApprovalAction('${item.id}', 'rejected')">Reject</button>
+              <button class="btn btn-sm btn-primary" onclick="handleApprovalAction('${item.id}', 'approved')">Approve</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function handleApprovalAction(id, action) {
+        APPROVALS = APPROVALS.filter(a => a.id !== id);
+        renderApprovals();
+        showToast(`Request ${id} has been ${action}.`);
+      }
+
+      function renderDashboard() {
+        renderChart();
+        renderApprovals();
+      }
+
+      // Franchisees Controller
+      function setFranchiseeTab(tab) {
+        appState.franchiseeTab = tab;
+        const btnView = document.getElementById('subTabFranchiseeList');
+        const btnAdd = document.getElementById('subTabFranchiseeAdd');
+        const viewSec = document.getElementById('franchiseeListSection');
+        const addSec = document.getElementById('franchiseeAddSection');
+
+        if (tab === 'view') {
+          if (btnView) btnView.classList.add('active');
+          if (btnAdd) btnAdd.classList.remove('active');
+          if (viewSec) viewSec.style.display = 'block';
+          if (addSec) addSec.style.display = 'none';
+        } else {
+          if (btnAdd) btnAdd.classList.add('active');
+          if (btnView) btnView.classList.remove('active');
+          if (addSec) addSec.style.display = 'block';
+          if (viewSec) viewSec.style.display = 'none';
+        }
+      }
+
+      function renderFranchisees() {
+        const tbody = document.getElementById('franchiseeTableBody');
+        if (!tbody) return;
+
+        const query = (document.getElementById('franchiseeSearchInput')?.value || '').toLowerCase();
+        const statusFilter = document.getElementById('franchiseeStatusFilter')?.value || 'all';
+
+        const filtered = FRANCHISEES.filter(item => {
+          const matchQuery = item.name.toLowerCase().includes(query) ||
+                             item.ownerName.toLowerCase().includes(query) ||
+                             item.city.toLowerCase().includes(query);
+          const matchStatus = statusFilter === 'all' || item.status === statusFilter;
+          return matchQuery && matchStatus;
+        });
+
+        tbody.innerHTML = filtered.map(item => `
+          <tr>
+            <td>
+              <div style="font-weight:700;">${item.name}</div>
+              <div style="font-size:12px; color:var(--outline);">${item.city}, ${item.state}</div>
+            </td>
+            <td>
+              <div style="font-weight:600;">${item.ownerName}</div>
+              <div style="font-size:12px; color:var(--outline);">${item.email}</div>
+            </td>
+            <td><strong style="color:var(--primary);">${item.commission}%</strong></td>
+            <td><span style="font-size:13px; color:var(--on-surface-variant);">${item.period}</span></td>
+            <td>
+              <span class="status-pill status-${item.status}">${item.status}</span>
+            </td>
+            <td style="text-align: right;">
+              <button class="btn btn-sm btn-outline" onclick="toggleFranchiseeStatus('${item.id}')">
+                ${item.status === 'active' ? 'Suspend' : 'Activate'}
+              </button>
+              <button class="btn btn-sm btn-secondary" onclick="deleteFranchisee('${item.id}')">
+                <span class="material-symbols-outlined" style="font-size:16px;">delete</span>
+              </button>
+            </td>
+          </tr>
+        `).join('');
+
+        const sidebarBadge = document.getElementById('sidebarFranchiseeBadge');
+        if (sidebarBadge) sidebarBadge.textContent = `${FRANCHISEES.filter(f => f.status === 'active').length} Active`;
+        const kpiVal = document.getElementById('kpiFranchiseeCount');
+        if (kpiVal) kpiVal.textContent = FRANCHISEES.length;
+      }
+
+      function toggleFranchiseeStatus(id) {
+        const item = FRANCHISEES.find(f => f.id === id);
+        if (item) {
+          item.status = item.status === 'active' ? 'suspended' : 'active';
+          renderFranchisees();
+          showToast(`Franchisee status changed to ${item.status}.`);
+        }
+      }
+
+      function deleteFranchisee(id) {
+        FRANCHISEES = FRANCHISEES.filter(f => f.id !== id);
+        renderFranchisees();
+        showToast('Franchisee record removed.');
+      }
+
+      function handleAddFranchiseeSubmit(event) {
+        event.preventDefault();
+        const name = document.getElementById('newFranchiseeName').value;
+        const owner = document.getElementById('newFranchiseeOwner').value;
+        const email = document.getElementById('newFranchiseeEmail').value;
+        const city = document.getElementById('newFranchiseeCity').value;
+        const state = document.getElementById('newFranchiseeState').value;
+        const commission = parseFloat(document.getElementById('newFranchiseeCommission').value) || 12.0;
+
+        const newBranch = {
+          id: `f-${Date.now()}`,
+          initials: name.substring(0, 2).toUpperCase(),
+          name,
+          ownerName: owner,
+          email,
+          city,
+          state,
+          commission,
+          period: 'Nov 2024 - Nov 2029',
+          status: 'active',
+          phone: '+1 (555) 000-0000',
+          capital: '$250,000'
+        };
+
+        FRANCHISEES.unshift(newBranch);
+        event.target.reset();
+        setFranchiseeTab('view');
+        renderFranchisees();
+        showToast('New Franchisee successfully registered and licensed!');
+      }
+
+      // Admissions Controller
+      function renderAdmissions() {
+        const tbody = document.getElementById('admissionsTableBody');
+        if (!tbody) return;
+
+        const query = (document.getElementById('admissionsSearchInput')?.value || '').toLowerCase();
+        const courseFilter = document.getElementById('admissionsCourseFilter')?.value || 'all';
+
+        const filtered = STUDENTS.filter(item => {
+          const matchQuery = item.name.toLowerCase().includes(query) ||
+                             item.admissionNo.toLowerCase().includes(query) ||
+                             item.course.toLowerCase().includes(query);
+          const matchCourse = courseFilter === 'all' || item.course.includes(courseFilter);
+          return matchQuery && matchCourse;
+        });
+
+        tbody.innerHTML = filtered.map(item => `
+          <tr>
+            <td>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <img src="${item.avatarUrl}" style="width:36px; height:36px; border-radius:50%; object-fit:cover;" alt="Student Avatar"/>
+                <div>
+                  <div style="font-weight:700;">${item.name}</div>
+                  <div style="font-size:12px; color:var(--primary); font-family:monospace;">${item.admissionNo}</div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <div style="font-weight:600;">${item.course}</div>
+              <div style="font-size:12px; color:var(--outline);">${item.batch}</div>
+            </td>
+            <td><span style="font-size:13px;">${item.applicationDate}</span></td>
+            <td>
+              <span class="status-pill status-${item.status.toLowerCase()}">${item.status}</span>
+            </td>
+            <td><span style="font-weight:600; font-size:13px;">${item.feeStatus}</span></td>
+            <td style="text-align: right;">
+              <button class="btn btn-sm btn-outline" onclick="openStudentModal('${item.id}')">View Credential</button>
+              <button class="btn btn-sm btn-secondary" onclick="showToast('Smart ID card dispatched to batch queue.')" title="Print Smart ID">
+                <span class="material-symbols-outlined" style="font-size:16px;">badge</span>
+              </button>
+            </td>
+          </tr>
+        `).join('');
+
+        const sidebarBadge = document.getElementById('sidebarAdmissionsBadge');
+        if (sidebarBadge) sidebarBadge.textContent = `${STUDENTS.length} Candidates`;
+        const kpiVal = document.getElementById('kpiAdmissionsCount');
+        if (kpiVal) kpiVal.textContent = STUDENTS.length;
+      }
+
+      function openStudentModal(id) {
+        const student = STUDENTS.find(s => s.id === id);
+        if (!student) return;
+        const content = document.getElementById('studentModalContent');
+        if (content) {
+          content.innerHTML = `
+            <div style="display:flex; gap:16px; align-items:center; margin-bottom:20px; background:var(--surface-low); padding:16px; border-radius:12px; border:1px solid var(--border);">
+              <img src="${student.avatarUrl}" style="width:72px; height:72px; border-radius:12px; object-fit:cover;" alt="Avatar" />
+              <div>
+                <h3 style="font-size:18px; font-weight:800;">${student.name}</h3>
+                <p style="font-size:13px; color:var(--primary); font-weight:700; font-family:monospace;">${student.admissionNo}</p>
+                <p style="font-size:12px; color:var(--outline);">${student.course}</p>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; font-size:13px;">
+              <div><strong>Email:</strong> ${student.email}</div>
+              <div><strong>Phone:</strong> ${student.phone}</div>
+              <div><strong>Academic Year:</strong> ${student.year}</div>
+              <div><strong>Status:</strong> ${student.status}</div>
+              <div><strong>Guardian:</strong> ${student.guardianName}</div>
+              <div><strong>Guardian Contact:</strong> ${student.guardianPhone}</div>
+            </div>
+          `;
+        }
+        openModal('studentDetailModal');
+      }
+
+      function openAdmissionWizard() {
+        appState.admissionStep = 1;
+        updateAdmissionWizardUI();
+        openModal('admissionWizardModal');
+      }
+
+      function updateAdmissionWizardUI() {
+        const step = appState.admissionStep;
+        document.getElementById('wizStepIndicator').textContent = `Step ${step} of 3`;
+        document.getElementById('wizStep1').style.display = step === 1 ? 'block' : 'none';
+        document.getElementById('wizStep2').style.display = step === 2 ? 'block' : 'none';
+        document.getElementById('wizStep3').style.display = step === 3 ? 'block' : 'none';
+
+        document.getElementById('wizPrevBtn').style.display = step > 1 ? 'inline-flex' : 'none';
+        document.getElementById('wizNextBtn').textContent = step === 3 ? 'Submit & Enroll' : 'Next Step';
+      }
+
+      function nextAdmissionWizardStep() {
+        if (appState.admissionStep < 3) {
+          appState.admissionStep++;
+          updateAdmissionWizardUI();
+        } else {
+          // Finish submit wizard
+          const name = document.getElementById('wizStudentName').value || 'New Student';
+          const email = document.getElementById('wizStudentEmail').value || 'student@apex.edu';
+          const course = document.getElementById('wizStudentCourse').value;
+          const phone = document.getElementById('wizStudentPhone').value || '+1 (555) 123-4567';
+          const guardian = document.getElementById('wizGuardianName').value || 'N/A';
+          const guardianPhone = document.getElementById('wizGuardianPhone').value || 'N/A';
+
+          const newStudent = {
+            id: `s-${Date.now()}`,
+            admissionNo: `ADM-2024-${Math.floor(1000 + Math.random() * 9000)}`,
+            name,
+            email,
+            avatarUrl: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150&auto=format&fit=crop&q=80',
+            course,
+            batch: 'Batch A (Morning) • 2024',
+            year: '2024 - 2025',
+            applicationDate: 'Just Now',
+            status: 'Enrolled',
+            feeStatus: 'Paid ($5,000)',
+            feeAmount: 5000,
+            feePaid: 5000,
+            phone,
+            guardianName: guardian,
+            guardianPhone
+          };
+
+          STUDENTS.unshift(newStudent);
+          closeModal('admissionWizardModal');
+          renderAdmissions();
+          showToast(`Student ${name} successfully enrolled!`);
+        }
+      }
+
+      function prevAdmissionWizardStep() {
+        if (appState.admissionStep > 1) {
+          appState.admissionStep--;
+          updateAdmissionWizardUI();
+        }
+      }
+
+      // Student Fee Portal Controller
+      function renderFeePortal() {
+        document.getElementById('feeStudentName').textContent = activeStudentAccount.name;
+        document.getElementById('feeStudentRoll').textContent = activeStudentAccount.rollNo;
+        document.getElementById('feeStudentCourse').textContent = activeStudentAccount.course;
+        document.getElementById('feeStudentCampus').textContent = activeStudentAccount.campus;
+        document.getElementById('feeStudentAvatar').src = activeStudentAccount.avatarUrl;
+
+        document.getElementById('feeTotalDueDisplay').textContent = `$${activeStudentAccount.dueAmount.toFixed(2)}`;
+        document.getElementById('feeLastPaidDisplay').textContent = `$${activeStudentAccount.lastPaid.toFixed(2)}`;
+        document.getElementById('feeStandingDisplay').textContent = activeStudentAccount.standing;
+
+        const payBtn = document.getElementById('feePayDueActionBtn');
+        if (payBtn) {
+          if (activeStudentAccount.dueAmount <= 0) {
+            payBtn.innerHTML = `<span class="material-symbols-outlined">check_circle</span> Balance Cleared`;
+            payBtn.disabled = true;
+          } else {
+            payBtn.innerHTML = `<span class="material-symbols-outlined">credit_card</span> Pay Fee ($${activeStudentAccount.dueAmount.toFixed(2)} Due)`;
+            payBtn.disabled = false;
+          }
+        }
+
+        renderFeeTransactions();
+      }
+
+      function renderFeeTransactions() {
+        const tbody = document.getElementById('feeTransactionsTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = FEE_TRANSACTIONS.map(item => `
+          <tr>
+            <td><span style="font-family:monospace; font-weight:700; color:var(--primary);">${item.id}</span></td>
+            <td><span style="font-weight:600;">${item.particulars}</span></td>
+            <td><span style="font-size:12px; color:var(--outline);">${item.dateTime}</span></td>
+            <td><strong style="font-size:15px;">$${item.amount.toFixed(2)}</strong></td>
+            <td><span style="font-size:13px;">${item.paymentMode}</span></td>
+            <td><span class="status-pill status-${item.status.toLowerCase()}">${item.status}</span></td>
+            <td style="text-align: right;">
+              ${item.receiptNo ? `<button class="btn btn-sm btn-outline" onclick="openReceiptModal('${item.id}')">View Receipt</button>` : `<button class="btn btn-sm btn-primary" onclick="openPayFeeModal()">Pay Now</button>`}
+            </td>
+          </tr>
+        `).join('');
+      }
+
+      function handleFeeSearch(e) {
+        e.preventDefault();
+        const query = document.getElementById('feeSearchQuery').value.trim().toLowerCase();
+        if (!query) return;
+
+        const found = STUDENTS.find(s => s.admissionNo.toLowerCase().includes(query) || s.name.toLowerCase().includes(query));
+        if (found) {
+          activeStudentAccount.name = found.name;
+          activeStudentAccount.rollNo = found.admissionNo;
+          activeStudentAccount.course = found.course;
+          activeStudentAccount.avatarUrl = found.avatarUrl;
+          activeStudentAccount.dueAmount = found.feeAmount - found.feePaid;
+          renderFeePortal();
+          showToast(`Student record loaded for ${found.name}`);
+        } else {
+          showToast('Student record found in system catalog.');
+        }
+      }
+
+      function openPayFeeModal() {
+        document.getElementById('payFeeModalStudentMeta').textContent = `${activeStudentAccount.name} (${activeStudentAccount.rollNo})`;
+        document.getElementById('payFeePayableDisplay').textContent = `$${activeStudentAccount.dueAmount.toFixed(2)}`;
+        openModal('payFeeModal');
+      }
+
+      function handlePayFeeSubmit(e) {
+        e.preventDefault();
+        const paidAmt = activeStudentAccount.dueAmount;
+        activeStudentAccount.lastPaid = paidAmt;
+        activeStudentAccount.dueAmount = 0.00;
+
+        const newTxnId = `TXN-${Math.floor(10000000 + Math.random() * 90000000)}`;
+        const newReceiptNo = `RCP-2024-${Math.floor(100 + Math.random() * 900)}`;
+
+        FEE_TRANSACTIONS.unshift({
+          id: newTxnId,
+          particulars: 'Tuition Fee Payment',
+          dateTime: 'Just Now',
+          amount: paidAmt,
+          paymentMode: 'Credit Card (*4821)',
+          status: 'Paid',
+          receiptNo: newReceiptNo
+        });
+
+        closeModal('payFeeModal');
+        renderFeePortal();
+        showToast('Payment processed successfully!');
+        openReceiptModal(newTxnId);
+      }
+
+      function openReceiptModal(txnId) {
+        const txn = FEE_TRANSACTIONS.find(t => t.id === txnId) || FEE_TRANSACTIONS[0];
+        document.getElementById('receiptTxnNo').textContent = txn.receiptNo || 'RCP-2024-88';
+        document.getElementById('receiptStudentName').textContent = activeStudentAccount.name;
+        document.getElementById('receiptRollNo').textContent = activeStudentAccount.rollNo;
+        document.getElementById('receiptDate').textContent = txn.dateTime;
+        document.getElementById('receiptTxnRef').textContent = txn.id;
+        document.getElementById('receiptParticulars').textContent = txn.particulars;
+        document.getElementById('receiptAmount').textContent = `$${txn.amount.toFixed(2)}`;
+        document.getElementById('receiptPaymentMode').textContent = txn.paymentMode;
+        openModal('receiptModal');
+      }
+
+      // CMS & Website Controller
+      function setCMSTab(tab) {
+        appState.cmsTab = tab;
+        document.querySelectorAll('.cms-tab-btn').forEach(btn => {
+          if (btn.getAttribute('data-cmstab') === tab) btn.classList.add('active');
+          else btn.classList.remove('active');
+        });
+
+        document.querySelectorAll('.cms-panel').forEach(panel => {
+          panel.style.display = 'none';
+        });
+
+        const activePanel = document.getElementById(`cms-panel-${tab}`);
+        if (activePanel) activePanel.style.display = 'block';
+
+        renderCMS();
+      }
+
+      function renderCMS() {
+        if (appState.cmsTab === 'jobs') renderJobs();
+        if (appState.cmsTab === 'applicants') renderApplicants();
+        if (appState.cmsTab === 'testimonials') renderTestimonials();
+        if (appState.cmsTab === 'inquiries') renderInquiries();
+      }
+
+      function renderJobs() {
+        const tbody = document.getElementById('jobsTableBody');
+        if (!tbody) return;
+
+        tbody.innerHTML = JOBS.map(job => `
+          <tr>
+            <td>
+              <div style="font-weight:700;">${job.title}</div>
+            </td>
+            <td><span style="font-size:13px;">${job.department}</span></td>
+            <td><span style="font-size:13px; color:var(--outline);">${job.location}</span></td>
+            <td><span class="badge">${job.type}</span></td>
+            <td><strong>${job.applicantsCount} Applicants</strong></td>
+            <td>
+              <span class="status-pill status-${job.isActive ? 'active' : 'suspended'}">${job.isActive ? 'Active' : 'Closed'}</span>
+            </td>
+            <td style="text-align: right;">
+              <button class="btn btn-sm btn-outline" onclick="toggleJobStatus('${job.id}')">${job.isActive ? 'Close' : 'Reopen'}</button>
+              <button class="btn btn-sm btn-secondary" onclick="deleteJob('${job.id}')">
+                <span class="material-symbols-outlined" style="font-size:16px;">delete</span>
+              </button>
+            </td>
+          </tr>
+        `).join('');
+
+        const kpiVal = document.getElementById('kpiJobsCount');
+        if (kpiVal) kpiVal.textContent = `${JOBS.filter(j => j.isActive).length} Open`;
+      }
+
+      function toggleJobStatus(id) {
+        const job = JOBS.find(j => j.id === id);
+        if (job) {
+          job.isActive = !job.isActive;
+          renderJobs();
+          showToast(`Job listing updated to ${job.isActive ? 'Active' : 'Closed'}.`);
+        }
+      }
+
+      function deleteJob(id) {
+        JOBS = JOBS.filter(j => j.id !== id);
+        renderJobs();
+        showToast('Job opening removed.');
+      }
+
+      function handleAddJobSubmit(e) {
+        e.preventDefault();
+        const title = document.getElementById('newJobTitle').value;
+        const dept = document.getElementById('newJobDept').value;
+        const type = document.getElementById('newJobType').value;
+        const location = document.getElementById('newJobLocation').value;
+
+        JOBS.unshift({
+          id: `job-${Date.now()}`,
+          title,
+          department: dept,
+          location,
+          type,
+          applicantsCount: 0,
+          isActive: true
+        });
+
+        closeModal('addJobModal');
+        e.target.reset();
+        renderJobs();
+        showToast('Career opening published!');
+      }
+
+      function renderApplicants() {
+        const container = document.getElementById('applicantsListContainer');
+        if (!container) return;
+
+        container.innerHTML = APPLICANTS.map(app => `
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:14px; background:var(--surface-low); border-radius:12px; margin-bottom:10px; border:1px solid var(--border);">
+            <div>
+              <div style="font-weight:700; font-size:14px;">${app.name}</div>
+              <div style="font-size:12px; color:var(--outline);">${app.role} • ${app.exp} Exp</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span class="status-pill status-active">${app.status}</span>
+              <button class="btn btn-sm btn-primary" onclick="showToast('Interview invitation email dispatched to candidate.')">Contact Candidate</button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function renderTestimonials() {
+        const container = document.getElementById('testimonialsGridContainer');
+        if (!container) return;
+
+        container.innerHTML = TESTIMONIALS.map(t => `
+          <div class="card" style="padding:18px;">
+            <div style="font-size:13px; font-style:italic; color:var(--on-surface-variant); margin-bottom:12px;">"${t.quote}"</div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <div>
+                <div style="font-weight:700; font-size:13px;">${t.author}</div>
+                <div style="font-size:11px; color:var(--outline);">${t.role}</div>
+              </div>
+              <button class="btn btn-sm ${t.approved ? 'btn-secondary' : 'btn-primary'}" onclick="toggleTestimonial('${t.id}')">
+                ${t.approved ? 'Unpublish' : 'Approve'}
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      function toggleTestimonial(id) {
+        const item = TESTIMONIALS.find(t => t.id === id);
+        if (item) {
+          item.approved = !item.approved;
+          renderTestimonials();
+          showToast(`Testimonial ${item.approved ? 'approved for website display' : 'unpublished'}.`);
+        }
+      }
+
+      function renderInquiries() {
+        const container = document.getElementById('inquiriesListContainer');
+        if (!container) return;
+
+        container.innerHTML = INQUIRIES.map(inq => `
+          <div style="padding:16px; background:var(--surface-low); border-radius:12px; margin-bottom:12px; border:1px solid var(--border);">
+            <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+              <div style="font-weight:700; font-size:14px;">${inq.subject}</div>
+              <span style="font-size:12px; color:var(--outline);">${inq.time}</span>
+            </div>
+            <div style="font-size:12px; color:var(--primary); font-weight:600; margin-bottom:6px;">From: ${inq.name} (${inq.email})</div>
+            <p style="font-size:13px; color:var(--on-surface-variant); margin-bottom:12px;">${inq.msg}</p>
+            <div style="display:flex; justify-content:flex-end; gap:8px;">
+              <button class="btn btn-sm btn-primary" onclick="replyInquiry('${inq.id}')">${inq.replied ? 'Resend Reply' : 'Send Direct Reply'}</button>
+            </div>
+          </div>
+        `).join('');
+
+        const kpiVal = document.getElementById('kpiInquiriesCount');
+        if (kpiVal) kpiVal.textContent = INQUIRIES.length;
+      }
+
+      function replyInquiry(id) {
+        const inq = INQUIRIES.find(i => i.id === id);
+        if (inq) {
+          inq.replied = true;
+          renderInquiries();
+          showToast(`Response sent to ${inq.email}`);
+        }
+      }
+
+      // Global Search Bar Handler
+      function initGlobalSearch() {
+        const searchInput = document.getElementById('globalSearchInput');
+        if (!searchInput) return;
+
+        searchInput.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter') {
+            const query = searchInput.value.trim().toLowerCase();
+            if (!query) return;
+
+            // Search franchisees
+            const matchFranchisee = FRANCHISEES.find(f => f.name.toLowerCase().includes(query) || f.city.toLowerCase().includes(query));
+            if (matchFranchisee) {
+              navigateTo('franchisees');
+              document.getElementById('franchiseeSearchInput').value = query;
+              renderFranchisees();
+              showToast(`Navigated to Franchisee match: ${matchFranchisee.name}`);
+              return;
+            }
+
+            // Search students
+            const matchStudent = STUDENTS.find(s => s.name.toLowerCase().includes(query) || s.admissionNo.toLowerCase().includes(query));
+            if (matchStudent) {
+              navigateTo('admissions');
+              document.getElementById('admissionsSearchInput').value = query;
+              renderAdmissions();
+              showToast(`Navigated to Student match: ${matchStudent.name}`);
+              return;
+            }
+
+            showToast(`Global search performed for "${query}".`);
+          }
+        });
+      }
+
+      // Setup Event Listeners & Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        // Wire up sidebar nav items
+        document.querySelectorAll('.nav-link').forEach(link => {
+          link.addEventListener('click', (e) => {
+            e.preventDefault();
+            const pageId = link.getAttribute('data-page');
+            if (pageId) navigateTo(pageId);
+          });
+        });
+
+        // Close modals when clicking backdrop
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+          overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+              closeModal(overlay.id);
+            }
+          });
+        });
+
+        initGlobalSearch();
+
+        // Initial application state render
+        renderDashboard();
+      });
+    </script>
+  </body>
+</html>
